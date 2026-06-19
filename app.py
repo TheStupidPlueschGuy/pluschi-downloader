@@ -15,19 +15,17 @@ def get_download_folder():
             return path
     return home
 
-def get_ffmpeg_path():
-    """Findet ffmpeg - entweder gebundelt in der EXE oder im System"""
+def get_ffmpeg_dir():
+    """Gibt den Ordner zurück wo ffmpeg.exe liegt (gebündelt in EXE)"""
     if getattr(sys, 'frozen', False):
-        # Läuft als .exe (PyInstaller)
-        base = sys._MEIPASS
-        ffmpeg = os.path.join(base, "ffmpeg.exe")
-        if os.path.exists(ffmpeg):
-            return base
-    # Fallback: System-FFmpeg
-    return None
+        # PyInstaller EXE - ffmpeg liegt im _MEIPASS Ordner
+        return sys._MEIPASS
+    # Im Entwicklungsmodus - gleicher Ordner wie app.py
+    return os.path.dirname(os.path.abspath(__file__))
 
 DOWNLOAD_FOLDER = get_download_folder()
-FFMPEG_PATH = get_ffmpeg_path()
+FFMPEG_DIR = get_ffmpeg_dir()
+
 progress_data = {"percent": 0, "status": "idle", "filename": ""}
 
 def progress_hook(d):
@@ -39,11 +37,9 @@ def progress_hook(d):
         except:
             progress_data["percent"] = 0
         progress_data["status"] = "downloading"
-        progress_data["filename"] = d.get("filename", "")
     elif d["status"] == "finished":
         progress_data["percent"] = 100
         progress_data["status"] = "finished"
-        progress_data["filename"] = d.get("filename", "")
 
 @app.route("/")
 def index():
@@ -68,9 +64,8 @@ def download():
                 "outtmpl": os.path.join(DOWNLOAD_FOLDER, "%(title)s.%(ext)s"),
                 "progress_hooks": [progress_hook],
                 "quiet": True,
+                "ffmpeg_location": FFMPEG_DIR,  # Immer gesetzt!
             }
-            if FFMPEG_PATH:
-                base_opts["ffmpeg_location"] = FFMPEG_PATH
 
             if fmt == "mp3":
                 ydl_opts = {
@@ -91,6 +86,7 @@ def download():
 
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([url])
+
         except Exception as e:
             progress_data["status"] = "error"
             progress_data["error"] = str(e)
