@@ -7,7 +7,6 @@ import yt_dlp
 
 app = Flask(__name__)
 
-# Output folder: Desktop or Downloads
 def get_download_folder():
     home = os.path.expanduser("~")
     for folder in ["Downloads", "Desktop"]:
@@ -16,7 +15,19 @@ def get_download_folder():
             return path
     return home
 
+def get_ffmpeg_path():
+    """Findet ffmpeg - entweder gebundelt in der EXE oder im System"""
+    if getattr(sys, 'frozen', False):
+        # Läuft als .exe (PyInstaller)
+        base = sys._MEIPASS
+        ffmpeg = os.path.join(base, "ffmpeg.exe")
+        if os.path.exists(ffmpeg):
+            return base
+    # Fallback: System-FFmpeg
+    return None
+
 DOWNLOAD_FOLDER = get_download_folder()
+FFMPEG_PATH = get_ffmpeg_path()
 progress_data = {"percent": 0, "status": "idle", "filename": ""}
 
 def progress_hook(d):
@@ -53,26 +64,31 @@ def download():
     def run():
         global progress_data
         try:
+            base_opts = {
+                "outtmpl": os.path.join(DOWNLOAD_FOLDER, "%(title)s.%(ext)s"),
+                "progress_hooks": [progress_hook],
+                "quiet": True,
+            }
+            if FFMPEG_PATH:
+                base_opts["ffmpeg_location"] = FFMPEG_PATH
+
             if fmt == "mp3":
                 ydl_opts = {
+                    **base_opts,
                     "format": "bestaudio/best",
-                    "outtmpl": os.path.join(DOWNLOAD_FOLDER, "%(title)s.%(ext)s"),
                     "postprocessors": [{
                         "key": "FFmpegExtractAudio",
                         "preferredcodec": "mp3",
                         "preferredquality": "192",
                     }],
-                    "progress_hooks": [progress_hook],
-                    "quiet": True,
                 }
             else:
                 ydl_opts = {
+                    **base_opts,
                     "format": "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
-                    "outtmpl": os.path.join(DOWNLOAD_FOLDER, "%(title)s.%(ext)s"),
-                    "progress_hooks": [progress_hook],
-                    "quiet": True,
                     "merge_output_format": "mp4",
                 }
+
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([url])
         except Exception as e:
