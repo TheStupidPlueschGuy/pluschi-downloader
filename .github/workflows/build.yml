@@ -21,11 +21,23 @@ jobs:
       - name: Abhängigkeiten installieren
         run: pip install flask yt-dlp pyinstaller
 
-      - name: EXE bauen
+      - name: FFmpeg herunterladen
+        run: |
+          curl -L "https://github.com/yt-dlp/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip" -o ffmpeg.zip
+          Expand-Archive ffmpeg.zip -DestinationPath ffmpeg_extracted
+          $ffmpegBin = Get-ChildItem -Recurse -Filter "ffmpeg.exe" ffmpeg_extracted | Select-Object -First 1
+          Copy-Item $ffmpegBin.FullName -Destination "ffmpeg.exe"
+          $ffprobeBin = Get-ChildItem -Recurse -Filter "ffprobe.exe" ffmpeg_extracted | Select-Object -First 1
+          Copy-Item $ffprobeBin.FullName -Destination "ffprobe.exe"
+          echo "FFmpeg kopiert!"
+
+      - name: EXE bauen (mit FFmpeg gebündelt)
         run: |
           pyinstaller --onefile --noconsole `
             --name "Plueschi_Downloader" `
             --add-data "templates;templates" `
+            --add-binary "ffmpeg.exe;." `
+            --add-binary "ffprobe.exe;." `
             app.py
 
       - name: EXE als Artifact hochladen
