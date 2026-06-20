@@ -9,23 +9,10 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Inter',sans-serif;background:#0a0a0f;min-height:100vh;color:#fff;}
 .bg-glow{position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 20% 50%,var(--glow1) 0%,transparent 70%),radial-gradient(ellipse 50% 40% at 80% 50%,var(--glow2) 0%,transparent 70%);pointer-events:none;z-index:0;}
-
-/* CSS Variablen für Farben */
-:root {
-  --c1: #7c3aed;
-  --c2: #db2777;
-  --c1-light: #a78bfa;
-  --c2-light: #ec4899;
-  --glow1: rgba(139,92,246,0.15);
-  --glow2: rgba(236,72,153,0.12);
-}
-
-/* Layout */
+:root{--c1:#7c3aed;--c2:#db2777;--c1-light:#a78bfa;--c2-light:#ec4899;--glow1:rgba(139,92,246,0.15);--glow2:rgba(236,72,153,0.12);}
 .layout{display:flex;min-height:100vh;position:relative;z-index:1;}
-.sidebar{width:280px;min-width:280px;background:rgba(255,255,255,0.03);border-right:1px solid rgba(255,255,255,0.07);padding:24px 20px;display:flex;flex-direction:column;gap:8px;}
-.main{flex:1;padding:40px 48px;overflow-y:auto;}
-
-/* Sidebar */
+.sidebar{width:260px;min-width:260px;background:rgba(255,255,255,0.03);border-right:1px solid rgba(255,255,255,0.07);padding:24px 16px;display:flex;flex-direction:column;gap:8px;}
+.main{flex:1;padding:32px 40px;overflow-y:auto;}
 .sidebar-logo{display:flex;align-items:center;gap:10px;padding:8px 12px;margin-bottom:16px;}
 .sidebar-logo span{font-size:28px;}
 .sidebar-logo h2{font-size:16px;font-weight:900;background:linear-gradient(135deg,var(--c1-light),var(--c2-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -34,33 +21,22 @@ body{font-family:'Inter',sans-serif;background:#0a0a0f;min-height:100vh;color:#f
 .nav-item.active{background:rgba(139,92,246,0.2);color:var(--c1-light);border:1px solid rgba(139,92,246,0.3);}
 .nav-icon{font-size:18px;width:24px;text-align:center;}
 .sidebar-divider{height:1px;background:rgba(255,255,255,0.06);margin:8px 0;}
-
-/* Pages */
-.page{display:none;}
-.page.active{display:block;}
-
-/* Cards */
+.page{display:none;}.page.active{display:block;}
 .card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px;margin-bottom:24px;}
 .card-title{font-size:18px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
-
-/* Form elements */
 label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
 .input{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:13px 16px;color:#fff;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:all 0.2s;}
 .input:focus{border-color:rgba(167,139,250,0.5);background:rgba(255,255,255,0.08);}
 .input::placeholder{color:rgba(255,255,255,0.2);}
-
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
 .row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;}
-
 .format-btn{background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:13px;color:rgba(255,255,255,0.5);font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .format-btn:hover{border-color:rgba(167,139,250,0.4);color:rgba(255,255,255,0.8);}
 .format-btn.active{background:linear-gradient(135deg,rgba(124,58,237,0.3),rgba(219,39,119,0.2));border-color:var(--c1-light);color:#fff;}
-
 .quality-btn{background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px;color:rgba(255,255,255,0.5);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;text-align:center;}
 .quality-btn:hover{border-color:rgba(167,139,250,0.4);color:rgba(255,255,255,0.8);}
 .quality-btn.active{background:rgba(139,92,246,0.2);border-color:var(--c1-light);color:var(--c1-light);}
 .quality-btn.mp3-only{display:none;}
-
 .btn{padding:14px 24px;border-radius:12px;border:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;}
 .btn-primary{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;width:100%;}
 .btn-primary:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 30px rgba(124,58,237,0.4);}
@@ -68,33 +44,20 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
 .btn-secondary{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.1);}
 .btn-secondary:hover{background:rgba(255,255,255,0.1);color:#fff;}
 .btn-sm{padding:8px 14px;font-size:12px;border-radius:8px;}
-
-/* Thumbnail preview */
 .preview-box{display:none;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px;margin-bottom:20px;flex-direction:row;gap:16px;align-items:center;}
 .preview-box.show{display:flex;}
 .preview-thumb{width:120px;height:68px;object-fit:cover;border-radius:8px;flex-shrink:0;}
-.preview-info{}
 .preview-title{font-size:14px;font-weight:700;margin-bottom:4px;line-height:1.3;}
 .preview-meta{font-size:12px;color:rgba(255,255,255,0.4);}
-
-/* Progress */
-.progress-wrap{display:none;margin-top:20px;}
-.progress-wrap.show{display:block;}
+.progress-wrap{display:none;margin-top:20px;}.progress-wrap.show{display:block;}
 .progress-bar-bg{background:rgba(255,255,255,0.07);border-radius:999px;height:8px;overflow:hidden;margin-bottom:10px;}
 .progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--c1),var(--c2));border-radius:999px;width:0%;transition:width 0.3s ease;}
 .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,0.4);}
-
-/* Status */
 .status-msg{margin-top:16px;padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600;display:none;}
 .status-msg.show{display:block;}
 .status-msg.success{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.2);}
 .status-msg.error{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.2);}
-
-/* Folder picker */
-.folder-row{display:flex;gap:10px;margin-bottom:20px;}
-.folder-row .input{flex:1;margin:0;}
-
-/* History */
+.folder-row{display:flex;gap:10px;margin-bottom:20px;}.folder-row .input{flex:1;margin:0;}
 .history-item{display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;margin-bottom:10px;transition:all 0.2s;}
 .history-item:hover{background:rgba(255,255,255,0.06);}
 .history-thumb{width:72px;height:42px;object-fit:cover;border-radius:6px;flex-shrink:0;background:rgba(255,255,255,0.05);}
@@ -108,8 +71,6 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
 .btn-ghost{background:none;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:6px 10px;color:rgba(255,255,255,0.4);font-size:12px;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;}
 .btn-ghost:hover{background:rgba(255,255,255,0.07);color:#fff;}
 .history-empty{text-align:center;padding:48px;color:rgba(255,255,255,0.25);font-size:14px;}
-
-/* Settings */
 .setting-row{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
 .setting-row:last-child{border-bottom:none;}
 .setting-label{font-size:14px;font-weight:600;}
@@ -118,13 +79,35 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
 .toggle.on{background:linear-gradient(135deg,var(--c1),var(--c2));}
 .toggle::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:3px;left:3px;transition:all 0.2s;}
 .toggle.on::after{left:23px;}
-
-/* Color picker */
-.color-pair{display:flex;align-items:center;gap:12px;}
-.color-swatch{width:40px;height:40px;border-radius:10px;border:2px solid rgba(255,255,255,0.15);cursor:pointer;background:var(--c1);}
-.color-preview{height:8px;border-radius:999px;background:linear-gradient(135deg,var(--c1),var(--c2));flex:1;}
-
-/* Countdown overlay */
+/* Wird heruntergeladen */
+.dl-status-idle{text-align:center;padding:48px 24px;color:rgba(255,255,255,0.2);}
+.dl-status-idle .dl-idle-icon{font-size:48px;margin-bottom:12px;}
+.dl-active-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:24px;display:none;}
+.dl-active-card.show{display:block;}
+.dl-thumb{width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:16px;}
+.dl-title{font-size:16px;font-weight:700;margin-bottom:16px;line-height:1.4;}
+.dl-bar-bg{background:rgba(255,255,255,0.07);border-radius:999px;height:10px;overflow:hidden;margin-bottom:10px;}
+.dl-bar-fill{height:100%;background:linear-gradient(90deg,var(--c1),var(--c2));border-radius:999px;width:0%;transition:width 0.4s ease;}
+.dl-meta-row{display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:8px;}
+.dl-done{text-align:center;padding:32px;display:none;}
+.dl-done.show{display:block;}
+/* Statistiken */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+.stat-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:20px;}
+.stat-val{font-size:36px;font-weight:900;background:linear-gradient(135deg,var(--c1-light),var(--c2-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat-label{font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;}
+/* Schnellzugriff */
+.quick-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;}
+.quick-item:hover{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.12);}
+.quick-thumb{width:60px;height:36px;object-fit:cover;border-radius:6px;background:rgba(255,255,255,0.05);flex-shrink:0;}
+.quick-info{flex:1;min-width:0;}
+.quick-title{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.quick-meta{font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;}
+/* Unterstützte Seiten */
+.sites-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+.site-tag{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:6px 12px;font-size:13px;color:rgba(255,255,255,0.6);}
+.site-secret{margin-top:20px;padding:14px 16px;background:rgba(139,92,246,0.07);border:1px dashed rgba(139,92,246,0.25);border-radius:12px;font-size:11px;color:rgba(255,255,255,0.3);line-height:1.6;}
+/* Overlay */
 .overlay{position:fixed;inset:0;background:rgba(10,10,15,0.93);display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;z-index:999;backdrop-filter:blur(12px);}
 .overlay.show{display:flex;}
 .overlay-icon{font-size:72px;animation:pop 0.4s ease;}
@@ -139,7 +122,6 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
 <body>
 <div class="bg-glow"></div>
 
-<!-- Auto-close overlay -->
 <div class="overlay" id="overlay">
   <div class="overlay-icon">✅</div>
   <div class="overlay-title">Download abgeschlossen!</div>
@@ -153,60 +135,43 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
 </div>
 
 <div class="layout">
-  <!-- Sidebar -->
   <div class="sidebar">
-    <div class="sidebar-logo">
-      <span>🦊</span>
-      <h2>Plüsch DL</h2>
-    </div>
+    <div class="sidebar-logo"><span>🦊</span><h2>Plüsch DL</h2></div>
     <div class="sidebar-divider"></div>
-    <button class="nav-item active" onclick="showPage('download')">
-      <span class="nav-icon">⬇️</span> Herunterladen
-    </button>
-    <button class="nav-item" onclick="showPage('history'); loadHistory()">
-      <span class="nav-icon">📋</span> Verlauf
-    </button>
-    <button class="nav-item" onclick="showPage('settings')">
-      <span class="nav-icon">⚙️</span> Einstellungen
-    </button>
-    <button class="nav-item" onclick="showPage('impressum')">
-      <span class="nav-icon">📄</span> Impressum
-    </button>
+    <button class="nav-item active" onclick="showPage('download')"><span class="nav-icon">⬇️</span> Herunterladen</button>
+    <button class="nav-item" onclick="showPage('nowdl')"><span class="nav-icon">⏳</span> Wird heruntergeladen</button>
+    <button class="nav-item" onclick="showPage('quick'); updateQuickAccess()"><span class="nav-icon">⚡</span> Schnellzugriff</button>
+    <button class="nav-item" onclick="showPage('stats'); updateStats()"><span class="nav-icon">📊</span> Statistiken</button>
+    <div class="sidebar-divider"></div>
+    <button class="nav-item" onclick="showPage('history'); loadHistory()"><span class="nav-icon">📋</span> Verlauf</button>
+    <button class="nav-item" onclick="showPage('settings')"><span class="nav-icon">⚙️</span> Einstellungen</button>
+    <button class="nav-item" onclick="showPage('sites')"><span class="nav-icon">🌐</span> Unterstützte Seiten</button>
+    <button class="nav-item" onclick="showPage('impressum')"><span class="nav-icon">📄</span> Impressum</button>
     <div style="flex:1"></div>
     <div class="sidebar-divider"></div>
-    <div style="padding:10px 14px;font-size:11px;color:rgba(255,255,255,0.2);">YouTube · TikTok · Twitter<br>Instagram · 1000+ Seiten</div>
     <div style="padding:6px 14px 10px;font-size:11px;color:rgba(255,255,255,0.15);">© 2025 TheStupidPlueschGuy<br>Alle Rechte vorbehalten.</div>
   </div>
 
-  <!-- Main -->
   <div class="main">
 
-    <!-- Download Page -->
+    <!-- 1. Herunterladen -->
     <div class="page active" id="page-download">
       <div class="card">
         <div class="card-title">⬇️ Download</div>
-
         <label>Video-URL</label>
         <div style="display:flex;gap:10px;margin-bottom:16px;">
           <input class="input" type="text" id="urlInput" placeholder="https://www.youtube.com/watch?v=..." oninput="onUrlChange()" style="flex:1;margin:0;" />
           <button class="btn btn-secondary" onclick="loadPreview()" id="previewBtn">🔍</button>
         </div>
-
-        <!-- Preview -->
         <div class="preview-box" id="previewBox">
           <img class="preview-thumb" id="previewThumb" src="" alt=""/>
-          <div class="preview-info">
-            <div class="preview-title" id="previewTitle">—</div>
-            <div class="preview-meta" id="previewMeta">—</div>
-          </div>
+          <div><div class="preview-title" id="previewTitle">—</div><div class="preview-meta" id="previewMeta">—</div></div>
         </div>
-
         <label>Format</label>
         <div class="row" style="margin-bottom:16px;">
           <button class="format-btn active" id="btnMp4" onclick="setFormat('mp4')">🎬 MP4 (Video)</button>
           <button class="format-btn" id="btnMp3" onclick="setFormat('mp3')">🎵 MP3 (Audio)</button>
         </div>
-
         <label>Qualität</label>
         <div class="row-3" style="margin-bottom:20px;">
           <button class="quality-btn active" id="qBest" onclick="setQuality('best')">⭐ Beste</button>
@@ -215,34 +180,71 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
           <button class="quality-btn" id="q480" onclick="setQuality('480')">📱 480p</button>
           <button class="quality-btn mp3-only" id="qMp3" onclick="setQuality('mp3-192')" style="display:none;">🎵 192kbps</button>
         </div>
-
         <label>Speicherort</label>
         <div class="folder-row">
           <input class="input" type="text" id="folderInput" placeholder="C:\Users\...\Downloads" />
           <button class="btn btn-secondary" onclick="openFolderPicker()">📂</button>
         </div>
-
         <button class="btn btn-primary" id="dlBtn" onclick="startDownload()">⬇️ Herunterladen</button>
-
         <div class="progress-wrap" id="progressWrap">
-          <div class="progress-bar-bg" style="margin-top:20px;">
-            <div class="progress-bar-fill" id="progressFill"></div>
-          </div>
-          <div class="progress-meta">
-            <span id="progressLabel">Lädt herunter...</span>
-            <span id="progressPercent">0%</span>
-          </div>
-          <div class="progress-meta" style="margin-top:4px;">
-            <span id="progressSpeed"></span>
-            <span id="progressEta"></span>
-          </div>
+          <div class="progress-bar-bg" style="margin-top:20px;"><div class="progress-bar-fill" id="progressFill"></div></div>
+          <div class="progress-meta"><span id="progressLabel">Lädt herunter...</span><span id="progressPercent">0%</span></div>
+          <div class="progress-meta" style="margin-top:4px;"><span id="progressSpeed"></span><span id="progressEta"></span></div>
         </div>
-
         <div class="status-msg" id="statusMsg"></div>
       </div>
     </div>
 
-    <!-- History Page -->
+    <!-- 2. Wird heruntergeladen -->
+    <div class="page" id="page-nowdl">
+      <div class="card">
+        <div class="card-title">⏳ Wird heruntergeladen</div>
+        <div class="dl-status-idle" id="dlIdle">
+          <div class="dl-idle-icon">😴</div>
+          <div style="font-size:15px;font-weight:600;margin-bottom:6px;">Kein aktiver Download</div>
+          <div style="font-size:13px;">Starte einen Download um den Fortschritt hier zu sehen.</div>
+        </div>
+        <div class="dl-active-card" id="dlActiveCard">
+          <img class="dl-thumb" id="dlThumb" src="" onerror="this.style.display='none'" />
+          <div class="dl-title" id="dlTitle">—</div>
+          <div class="dl-bar-bg"><div class="dl-bar-fill" id="dlFill"></div></div>
+          <div class="dl-meta-row"><span id="dlLabel">Startet...</span><span id="dlPercent">0%</span></div>
+          <div class="dl-meta-row"><span id="dlSpeed"></span><span id="dlEta"></span></div>
+        </div>
+        <div class="dl-done" id="dlDone">
+          <div style="font-size:48px;margin-bottom:12px;">✅</div>
+          <div style="font-size:16px;font-weight:700;color:#4ade80;">Download abgeschlossen!</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:6px;" id="dlDoneFolder"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Schnellzugriff -->
+    <div class="page" id="page-quick">
+      <div class="card">
+        <div class="card-title">⚡ Schnellzugriff</div>
+        <div id="quickList"><div class="history-empty">📭 Noch keine Downloads</div></div>
+      </div>
+    </div>
+
+    <!-- 4. Statistiken -->
+    <div class="page" id="page-stats">
+      <div class="card">
+        <div class="card-title">📊 Statistiken</div>
+        <div class="stat-grid">
+          <div class="stat-box"><div class="stat-val" id="statTotal">0</div><div class="stat-label">Downloads gesamt</div></div>
+          <div class="stat-box"><div class="stat-val" id="statToday">0</div><div class="stat-label">Heute</div></div>
+          <div class="stat-box"><div class="stat-val" id="statMp4">0</div><div class="stat-label">MP4 Videos</div></div>
+          <div class="stat-box"><div class="stat-val" id="statMp3">0</div><div class="stat-label">MP3 Audios</div></div>
+        </div>
+        <div id="statLastCard" style="display:none;">
+          <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.4);margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;">Letzter Download</div>
+          <div class="history-item" id="statLastItem"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Verlauf -->
     <div class="page" id="page-history">
       <div class="card">
         <div class="card-title" style="justify-content:space-between;">
@@ -253,68 +255,44 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
       </div>
     </div>
 
-    <!-- Settings Page -->
+    <!-- Einstellungen -->
     <div class="page" id="page-settings">
       <div class="card">
         <div class="card-title">⚙️ Einstellungen</div>
         <div class="setting-row">
-          <div>
-            <div class="setting-label">Auto-Close nach Download</div>
-            <div class="setting-sub">App beendet sich automatisch nach 3 Sekunden</div>
-          </div>
+          <div><div class="setting-label">Auto-Close nach Download</div><div class="setting-sub">App beendet sich automatisch nach 3 Sekunden</div></div>
           <button class="toggle on" id="toggleAutoClose" onclick="toggleSetting('autoClose')"></button>
         </div>
         <div class="setting-row">
-          <div>
-            <div class="setting-label">Thumbnail-Vorschau laden</div>
-            <div class="setting-sub">Video-Info automatisch beim Einfügen laden</div>
-          </div>
+          <div><div class="setting-label">Thumbnail-Vorschau laden</div><div class="setting-sub">Video-Info automatisch beim Einfügen laden</div></div>
           <button class="toggle on" id="togglePreview" onclick="toggleSetting('autoPreview')"></button>
         </div>
         <div class="setting-row">
-          <div>
-            <div class="setting-label">Standard Download-Ordner</div>
-            <div class="setting-sub">Wird für alle Downloads verwendet</div>
-          </div>
+          <div><div class="setting-label">Standard Download-Ordner</div><div class="setting-sub">Wird für alle Downloads verwendet</div></div>
           <div style="display:flex;gap:8px;">
             <input class="input" id="settingFolder" style="width:260px;" />
             <button class="btn btn-secondary btn-sm" onclick="saveDefaultFolder()">Speichern</button>
           </div>
         </div>
       </div>
-
-      <!-- Farben -->
       <div class="card">
         <div class="card-title">🎨 Farben anpassen</div>
         <div class="setting-row">
-          <div>
-            <div class="setting-label">Farbe 1 (Links)</div>
-            <div class="setting-sub">Primärfarbe für Buttons & Akzente</div>
-          </div>
-          <div class="color-pair">
-            <input type="color" id="colorPicker1" value="#7c3aed" oninput="updateColors()" style="width:40px;height:40px;border-radius:10px;border:2px solid rgba(255,255,255,0.15);cursor:pointer;background:none;padding:2px;">
-          </div>
+          <div><div class="setting-label">Farbe 1 (Links)</div><div class="setting-sub">Primärfarbe</div></div>
+          <input type="color" id="colorPicker1" value="#7c3aed" oninput="updateColors()" style="width:40px;height:40px;border-radius:10px;border:2px solid rgba(255,255,255,0.15);cursor:pointer;background:none;padding:2px;">
         </div>
         <div class="setting-row">
-          <div>
-            <div class="setting-label">Farbe 2 (Rechts)</div>
-            <div class="setting-sub">Sekundärfarbe für Verlauf & Akzente</div>
-          </div>
-          <div class="color-pair">
-            <input type="color" id="colorPicker2" value="#db2777" oninput="updateColors()" style="width:40px;height:40px;border-radius:10px;border:2px solid rgba(255,255,255,0.15);cursor:pointer;background:none;padding:2px;">
-          </div>
+          <div><div class="setting-label">Farbe 2 (Rechts)</div><div class="setting-sub">Sekundärfarbe</div></div>
+          <input type="color" id="colorPicker2" value="#db2777" oninput="updateColors()" style="width:40px;height:40px;border-radius:10px;border:2px solid rgba(255,255,255,0.15);cursor:pointer;background:none;padding:2px;">
         </div>
         <div class="setting-row">
-          <div>
-            <div class="setting-label">Vorschau</div>
-          </div>
-          <div class="color-preview" id="colorPreview" style="flex:1;height:10px;border-radius:999px;"></div>
+          <div><div class="setting-label">Vorschau</div></div>
+          <div id="colorPreview" style="flex:1;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--c1),var(--c2));"></div>
         </div>
         <div style="display:flex;gap:10px;margin-top:16px;">
           <button class="btn btn-primary" style="flex:1;" onclick="saveColors()">💾 Farben speichern</button>
           <button class="btn btn-secondary btn-sm" onclick="resetColors()">↩️ Reset</button>
         </div>
-        <!-- Presets -->
         <div style="margin-top:16px;">
           <div style="font-size:11px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Schnell-Presets</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -327,18 +305,48 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
           </div>
         </div>
       </div>
-
       <div class="card">
         <div class="card-title">ℹ️ Info</div>
         <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.8;">
           <div>🦊 <b style="color:#fff;">Plüsch Downloader</b> v2.0</div>
           <div>⚡ Powered by yt-dlp + Flask</div>
-          <div>🎬 Unterstützt YouTube, TikTok, Twitter, Instagram und 1000+ weitere Seiten</div>
         </div>
       </div>
     </div>
 
-    <!-- Impressum Page -->
+    <!-- Unterstützte Seiten -->
+    <div class="page" id="page-sites">
+      <div class="card">
+        <div class="card-title">🌐 Unterstützte Seiten</div>
+        <div class="sites-grid">
+          <span class="site-tag">▶️ YouTube</span>
+          <span class="site-tag">🎵 TikTok</span>
+          <span class="site-tag">🐦 Twitter / X</span>
+          <span class="site-tag">📸 Instagram</span>
+          <span class="site-tag">📘 Facebook</span>
+          <span class="site-tag">🎮 Twitch</span>
+          <span class="site-tag">🎬 Vimeo</span>
+          <span class="site-tag">📺 Dailymotion</span>
+          <span class="site-tag">🎵 SoundCloud</span>
+          <span class="site-tag">📱 Snapchat</span>
+          <span class="site-tag">💬 Reddit</span>
+          <span class="site-tag">🎵 Bandcamp</span>
+          <span class="site-tag">📡 Rumble</span>
+          <span class="site-tag">🎙️ Podcast-RSS</span>
+          <span class="site-tag">🎮 YouTube Gaming</span>
+          <span class="site-tag">📺 ARD Mediathek</span>
+          <span class="site-tag">📺 ZDF Mediathek</span>
+          <span class="site-tag">+ 1000 weitere...</span>
+        </div>
+        <div class="site-secret">
+          🤫 Du kleiner Schlawiener... ich weiß nach welcher Seite du hier suchst.<br>
+          Aber Psst... die wird auch unterstützt. 😏<br>
+          <span style="font-size:10px;color:rgba(255,255,255,0.2);">yt-dlp unterstützt offiziell über 1.800 Seiten. Einfach URL reinkopieren und schauen was passiert.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Impressum -->
     <div class="page" id="page-impressum">
       <div class="card">
         <div class="card-title">📄 Impressum</div>
@@ -350,8 +358,7 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
             Dieses Tool ist ein privates Projekt und dient ausschließlich dem persönlichen Gebrauch.<br>
             Das Herunterladen von urheberrechtlich geschützten Inhalten ohne Genehmigung des Rechteinhabers kann gegen geltendes Recht verstoßen.<br>
             Der Nutzer ist selbst für die Einhaltung der jeweiligen Nutzungsbedingungen der verwendeten Plattformen verantwortlich.<br><br>
-            Powered by <b style="color:#fff;">yt-dlp</b> · <b style="color:#fff;">Flask</b> · <b style="color:#fff;">Python</b><br>
-            Icons & Fonts: Google Fonts (Inter)
+            Powered by <b style="color:#fff;">yt-dlp</b> · <b style="color:#fff;">Flask</b> · <b style="color:#fff;">Python</b>
           </div>
           <br>
           <div style="padding:12px 16px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2);border-radius:10px;font-size:12px;color:rgba(255,255,255,0.4);">
@@ -365,379 +372,230 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
 </div>
 
 <script>
-let selectedFormat = "mp4";
-let selectedQuality = "best";
-let polling = null;
-let countdownTimer = null;
-let cancelledClose = false;
+let selectedFormat="mp4",selectedQuality="best",polling=null,countdownTimer=null,cancelledClose=false;
+let settings={autoClose:true,autoPreview:true,defaultFolder:"",color1:"#7c3aed",color2:"#db2777"};
 
-// Settings
-let settings = {
-  autoClose: true,
-  autoPreview: true,
-  defaultFolder: "",
-  color1: "#7c3aed",
-  color2: "#db2777"
-};
-
-function loadSettings() {
-  try {
-    const s = localStorage.getItem("plueschi_settings");
-    if (s) settings = {...settings, ...JSON.parse(s)};
-  } catch(e) {}
+function loadSettings(){
+  try{const s=localStorage.getItem("plueschi_settings");if(s)settings={...settings,...JSON.parse(s)};}catch(e){}
   applySettings();
 }
-
-function saveSettings() {
-  localStorage.setItem("plueschi_settings", JSON.stringify(settings));
+function saveSettings(){localStorage.setItem("plueschi_settings",JSON.stringify(settings));}
+function applySettings(){
+  document.getElementById("toggleAutoClose").className="toggle"+(settings.autoClose?" on":"");
+  document.getElementById("togglePreview").className="toggle"+(settings.autoPreview?" on":"");
+  if(settings.defaultFolder){document.getElementById("folderInput").value=settings.defaultFolder;document.getElementById("settingFolder").value=settings.defaultFolder;}
+  document.getElementById("colorPicker1").value=settings.color1;
+  document.getElementById("colorPicker2").value=settings.color2;
+  applyColorsToDOM(settings.color1,settings.color2);
 }
+function toggleSetting(key){settings[key]=!settings[key];saveSettings();applySettings();}
+function saveDefaultFolder(){settings.defaultFolder=document.getElementById("settingFolder").value;document.getElementById("folderInput").value=settings.defaultFolder;saveSettings();}
 
-function applySettings() {
-  document.getElementById("toggleAutoClose").className = "toggle" + (settings.autoClose ? " on" : "");
-  document.getElementById("togglePreview").className = "toggle" + (settings.autoPreview ? " on" : "");
-  if (settings.defaultFolder) {
-    document.getElementById("folderInput").value = settings.defaultFolder;
-    document.getElementById("settingFolder").value = settings.defaultFolder;
-  }
-  // Farben anwenden
-  document.getElementById("colorPicker1").value = settings.color1;
-  document.getElementById("colorPicker2").value = settings.color2;
-  applyColorsToDOM(settings.color1, settings.color2);
-}
-
-function toggleSetting(key) {
-  settings[key] = !settings[key];
-  saveSettings();
-  applySettings();
-}
-
-function saveDefaultFolder() {
-  settings.defaultFolder = document.getElementById("settingFolder").value;
-  document.getElementById("folderInput").value = settings.defaultFolder;
-  saveSettings();
-}
-
-// ---- FARBEN ----
-function hexToRgb(hex) {
-  const r = parseInt(hex.slice(1,3),16);
-  const g = parseInt(hex.slice(3,5),16);
-  const b = parseInt(hex.slice(5,7),16);
-  return `${r},${g},${b}`;
-}
-
-function lightenHex(hex) {
-  // Hellere Version für --c1-light / --c2-light
-  const r = Math.min(255, parseInt(hex.slice(1,3),16) + 60);
-  const g = Math.min(255, parseInt(hex.slice(3,5),16) + 60);
-  const b = Math.min(255, parseInt(hex.slice(5,7),16) + 60);
-  return `#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
-}
-
-function applyColorsToDOM(c1, c2) {
-  const root = document.documentElement;
-  const c1l = lightenHex(c1);
-  const c2l = lightenHex(c2);
-  root.style.setProperty('--c1', c1);
-  root.style.setProperty('--c2', c2);
-  root.style.setProperty('--c1-light', c1l);
-  root.style.setProperty('--c2-light', c2l);
-  root.style.setProperty('--glow1', `rgba(${hexToRgb(c1)},0.15)`);
-  root.style.setProperty('--glow2', `rgba(${hexToRgb(c2)},0.12)`);
-
-  // Dynamische Style-Injection für rgba()-basierte Regeln
-  let styleEl = document.getElementById("dynamic-colors");
-  if (!styleEl) {
-    styleEl = document.createElement("style");
-    styleEl.id = "dynamic-colors";
-    document.head.appendChild(styleEl);
-  }
-  styleEl.textContent = `
-    .nav-item.active {
-      background: rgba(${hexToRgb(c1)},0.2) !important;
-      border: 1px solid rgba(${hexToRgb(c1)},0.4) !important;
-      color: ${c1l} !important;
-    }
-    .nav-item:hover { color: rgba(255,255,255,0.8); }
-    .input:focus { border-color: rgba(${hexToRgb(c1)},0.6) !important; }
-    .format-btn:hover { border-color: rgba(${hexToRgb(c1)},0.5) !important; }
-    .format-btn.active {
-      background: linear-gradient(135deg,rgba(${hexToRgb(c1)},0.35),rgba(${hexToRgb(c2)},0.2)) !important;
-      border-color: ${c1l} !important;
-    }
-    .quality-btn:hover { border-color: rgba(${hexToRgb(c1)},0.5) !important; }
-    .quality-btn.active {
-      background: rgba(${hexToRgb(c1)},0.2) !important;
-      border-color: ${c1l} !important;
-      color: ${c1l} !important;
-    }
-    .btn-primary:hover:not(:disabled) { box-shadow: 0 8px 30px rgba(${hexToRgb(c1)},0.4) !important; }
-    .badge-mp4 { background: rgba(${hexToRgb(c1)},0.2) !important; color: ${c1l} !important; }
-    .badge-mp3 { background: rgba(${hexToRgb(c2)},0.2) !important; color: ${c2l} !important; }
-    .countdown-ring { border-color: rgba(${hexToRgb(c1)},0.2) !important; border-top-color: ${c1l} !important; color: ${c1l} !important; }
-    .toggle.on { background: linear-gradient(135deg,${c1},${c2}) !important; }
-    .progress-bar-fill { background: linear-gradient(90deg,${c1},${c2}) !important; }
+function hexToRgb(hex){return `${parseInt(hex.slice(1,3),16)},${parseInt(hex.slice(3,5),16)},${parseInt(hex.slice(5,7),16)}`;}
+function lightenHex(hex){const r=Math.min(255,parseInt(hex.slice(1,3),16)+60),g=Math.min(255,parseInt(hex.slice(3,5),16)+60),b=Math.min(255,parseInt(hex.slice(5,7),16)+60);return `#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;}
+function applyColorsToDOM(c1,c2){
+  const root=document.documentElement,c1l=lightenHex(c1),c2l=lightenHex(c2);
+  root.style.setProperty('--c1',c1);root.style.setProperty('--c2',c2);
+  root.style.setProperty('--c1-light',c1l);root.style.setProperty('--c2-light',c2l);
+  root.style.setProperty('--glow1',`rgba(${hexToRgb(c1)},0.15)`);root.style.setProperty('--glow2',`rgba(${hexToRgb(c2)},0.12)`);
+  let styleEl=document.getElementById("dynamic-colors");
+  if(!styleEl){styleEl=document.createElement("style");styleEl.id="dynamic-colors";document.head.appendChild(styleEl);}
+  styleEl.textContent=`
+    .nav-item.active{background:rgba(${hexToRgb(c1)},0.2)!important;border:1px solid rgba(${hexToRgb(c1)},0.4)!important;color:${c1l}!important;}
+    .input:focus{border-color:rgba(${hexToRgb(c1)},0.6)!important;}
+    .format-btn:hover{border-color:rgba(${hexToRgb(c1)},0.5)!important;}
+    .format-btn.active{background:linear-gradient(135deg,rgba(${hexToRgb(c1)},0.35),rgba(${hexToRgb(c2)},0.2))!important;border-color:${c1l}!important;}
+    .quality-btn:hover{border-color:rgba(${hexToRgb(c1)},0.5)!important;}
+    .quality-btn.active{background:rgba(${hexToRgb(c1)},0.2)!important;border-color:${c1l}!important;color:${c1l}!important;}
+    .btn-primary:hover:not(:disabled){box-shadow:0 8px 30px rgba(${hexToRgb(c1)},0.4)!important;}
+    .badge-mp4{background:rgba(${hexToRgb(c1)},0.2)!important;color:${c1l}!important;}
+    .badge-mp3{background:rgba(${hexToRgb(c2)},0.2)!important;color:${c2l}!important;}
+    .countdown-ring{border-color:rgba(${hexToRgb(c1)},0.2)!important;border-top-color:${c1l}!important;color:${c1l}!important;}
+    .toggle.on{background:linear-gradient(135deg,${c1},${c2})!important;}
+    .progress-bar-fill,.dl-bar-fill{background:linear-gradient(90deg,${c1},${c2})!important;}
+    .stat-val{background:linear-gradient(135deg,${c1l},${c2l});-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
   `;
+  const prev=document.getElementById("colorPreview");if(prev)prev.style.background=`linear-gradient(135deg,${c1},${c2})`;
+}
+function updateColors(){applyColorsToDOM(document.getElementById("colorPicker1").value,document.getElementById("colorPicker2").value);}
+function saveColors(){settings.color1=document.getElementById("colorPicker1").value;settings.color2=document.getElementById("colorPicker2").value;saveSettings();showToast("✅ Farben gespeichert!");}
+function resetColors(){applyPreset("#7c3aed","#db2777");}
+function applyPreset(c1,c2){document.getElementById("colorPicker1").value=c1;document.getElementById("colorPicker2").value=c2;applyColorsToDOM(c1,c2);settings.color1=c1;settings.color2=c2;saveSettings();}
+function showToast(msg){let t=document.getElementById("toast");if(!t){t=document.createElement("div");t.id="toast";t.style.cssText="position:fixed;bottom:24px;right:24px;background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.3);color:#4ade80;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;transition:opacity 0.3s;";document.body.appendChild(t);}t.textContent=msg;t.style.opacity="1";setTimeout(()=>t.style.opacity="0",2000);}
 
-  // Vorschau updaten
-  const prev = document.getElementById("colorPreview");
-  if (prev) prev.style.background = `linear-gradient(135deg,${c1},${c2})`;
+function showPage(name){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".nav-item").forEach(n=>n.classList.remove("active"));
+  document.getElementById("page-"+name).classList.add("active");
+  if(event&&event.currentTarget)event.currentTarget.classList.add("active");
 }
 
-function updateColors() {
-  const c1 = document.getElementById("colorPicker1").value;
-  const c2 = document.getElementById("colorPicker2").value;
-  applyColorsToDOM(c1, c2);
+function setFormat(fmt){
+  selectedFormat=fmt;
+  document.getElementById("btnMp4").classList.toggle("active",fmt==="mp4");
+  document.getElementById("btnMp3").classList.toggle("active",fmt==="mp3");
+  document.querySelectorAll(".quality-btn:not(.mp3-only)").forEach(b=>b.style.display=fmt==="mp4"?"":"none");
+  document.querySelectorAll(".quality-btn.mp3-only").forEach(b=>b.style.display=fmt==="mp3"?"":"none");
 }
+function setQuality(q){selectedQuality=q;document.querySelectorAll(".quality-btn").forEach(b=>b.classList.remove("active"));const map={best:"qBest","1080":"q1080","720":"q720","480":"q480","mp3-192":"qMp3"};if(map[q])document.getElementById(map[q]).classList.add("active");}
 
-function saveColors() {
-  settings.color1 = document.getElementById("colorPicker1").value;
-  settings.color2 = document.getElementById("colorPicker2").value;
-  saveSettings();
-  showToast("✅ Farben gespeichert!");
-}
-
-function resetColors() {
-  applyPreset("#7c3aed", "#db2777");
-}
-
-function applyPreset(c1, c2) {
-  document.getElementById("colorPicker1").value = c1;
-  document.getElementById("colorPicker2").value = c2;
-  applyColorsToDOM(c1, c2);
-  settings.color1 = c1;
-  settings.color2 = c2;
-  saveSettings();
-}
-
-function showToast(msg) {
-  let t = document.getElementById("toast");
-  if (!t) {
-    t = document.createElement("div");
-    t.id = "toast";
-    t.style.cssText = "position:fixed;bottom:24px;right:24px;background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.3);color:#4ade80;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;transition:opacity 0.3s;";
-    document.body.appendChild(t);
-  }
-  t.textContent = msg;
-  t.style.opacity = "1";
-  setTimeout(() => t.style.opacity = "0", 2000);
-}
-
-// Navigation
-function showPage(name) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-  document.getElementById("page-" + name).classList.add("active");
-  if(event && event.currentTarget) event.currentTarget.classList.add("active");
-}
-
-// Format & Quality
-function setFormat(fmt) {
-  selectedFormat = fmt;
-  document.getElementById("btnMp4").classList.toggle("active", fmt === "mp4");
-  document.getElementById("btnMp3").classList.toggle("active", fmt === "mp3");
-  document.querySelectorAll(".quality-btn:not(.mp3-only)").forEach(b => b.style.display = fmt === "mp4" ? "" : "none");
-  document.querySelectorAll(".quality-btn.mp3-only").forEach(b => b.style.display = fmt === "mp3" ? "" : "none");
-}
-
-function setQuality(q) {
-  selectedQuality = q;
-  document.querySelectorAll(".quality-btn").forEach(b => b.classList.remove("active"));
-  const map = {best:"qBest","1080":"q1080","720":"q720","480":"q480","mp3-192":"qMp3"};
-  if (map[q]) document.getElementById(map[q]).classList.add("active");
-}
-
-// URL Change → Auto-Preview
-let previewTimeout = null;
-function onUrlChange() {
-  if (!settings.autoPreview) return;
-  clearTimeout(previewTimeout);
-  const url = document.getElementById("urlInput").value.trim();
-  if (url.length > 10) {
-    previewTimeout = setTimeout(loadPreview, 1200);
-  }
-}
-
-async function loadPreview() {
-  const url = document.getElementById("urlInput").value.trim();
-  if (!url) return;
-  document.getElementById("previewBtn").textContent = "⏳";
-  try {
-    const res = await fetch("/info", {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({url})
-    });
-    const d = await res.json();
-    if (d.error) { document.getElementById("previewBox").classList.remove("show"); return; }
-    document.getElementById("previewThumb").src = d.thumbnail || "";
-    document.getElementById("previewTitle").textContent = d.title || "Unbekannt";
-    const dur = d.duration ? formatDuration(d.duration) : "";
-    document.getElementById("previewMeta").textContent = [d.uploader, dur].filter(Boolean).join(" · ");
+let previewTimeout=null;
+function onUrlChange(){if(!settings.autoPreview)return;clearTimeout(previewTimeout);const url=document.getElementById("urlInput").value.trim();if(url.length>10)previewTimeout=setTimeout(loadPreview,1200);}
+async function loadPreview(){
+  const url=document.getElementById("urlInput").value.trim();if(!url)return;
+  document.getElementById("previewBtn").textContent="⏳";
+  try{
+    const res=await fetch("/info",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url})});
+    const d=await res.json();
+    if(d.error){document.getElementById("previewBox").classList.remove("show");return;}
+    document.getElementById("previewThumb").src=d.thumbnail||"";
+    document.getElementById("previewTitle").textContent=d.title||"Unbekannt";
+    const dur=d.duration?formatDuration(d.duration):"";
+    document.getElementById("previewMeta").textContent=[d.uploader,dur].filter(Boolean).join(" · ");
     document.getElementById("previewBox").classList.add("show");
-  } catch(e) {}
-  document.getElementById("previewBtn").textContent = "🔍";
+    // Auch für "Wird heruntergeladen" Seite vorbereiten
+    document.getElementById("dlThumb").src=d.thumbnail||"";
+    document.getElementById("dlTitle").textContent=d.title||"—";
+  }catch(e){}
+  document.getElementById("previewBtn").textContent="🔍";
 }
+function formatDuration(s){const m=Math.floor(s/60),sec=s%60;return `${m}:${sec.toString().padStart(2,"0")}`;}
 
-function formatDuration(s) {
-  const m = Math.floor(s/60), sec = s%60;
-  return `${m}:${sec.toString().padStart(2,"0")}`;
-}
-
-// Download
-async function startDownload() {
-  const url = document.getElementById("urlInput").value.trim();
-  if (!url) { showStatus("❌ Bitte eine URL eingeben!", "error"); return; }
-
-  const folder = document.getElementById("folderInput").value.trim();
-  cancelledClose = false;
-
-  document.getElementById("dlBtn").disabled = true;
+async function startDownload(){
+  const url=document.getElementById("urlInput").value.trim();
+  if(!url){showStatus("❌ Bitte eine URL eingeben!","error");return;}
+  const folder=document.getElementById("folderInput").value.trim();
+  cancelledClose=false;
+  document.getElementById("dlBtn").disabled=true;
   document.getElementById("progressWrap").classList.add("show");
   document.getElementById("statusMsg").classList.remove("show");
   setProgress(0);
-  document.getElementById("progressLabel").textContent = "Startet...";
-
-  try {
-    const res = await fetch("/download", {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({url, format: selectedFormat, quality: selectedQuality, folder})
-    });
-    const data = await res.json();
-    if (data.error) { showStatus("❌ " + data.error, "error"); resetBtn(); return; }
+  document.getElementById("progressLabel").textContent="Startet...";
+  // "Wird heruntergeladen" Seite vorbereiten
+  document.getElementById("dlIdle").style.display="none";
+  document.getElementById("dlDone").style.display="none";
+  document.getElementById("dlActiveCard").classList.add("show");
+  document.getElementById("dlLabel").textContent="Startet...";
+  document.getElementById("dlPercent").textContent="0%";
+  document.getElementById("dlFill").style.width="0%";
+  try{
+    const res=await fetch("/download",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url,format:selectedFormat,quality:selectedQuality,folder})});
+    const data=await res.json();
+    if(data.error){showStatus("❌ "+data.error,"error");resetBtn();resetNowDl();return;}
     pollProgress();
-  } catch(e) {
-    showStatus("❌ Verbindungsfehler!", "error");
-    resetBtn();
-  }
+  }catch(e){showStatus("❌ Verbindungsfehler!","error");resetBtn();resetNowDl();}
 }
 
-function pollProgress() {
-  polling = setInterval(async () => {
-    try {
-      const res = await fetch("/progress");
-      const d = await res.json();
-      if (d.status === "downloading") {
-        setProgress(d.percent || 0);
-        document.getElementById("progressLabel").textContent = "Lädt herunter...";
-        document.getElementById("progressSpeed").textContent = d.speed || "";
-        document.getElementById("progressEta").textContent = d.eta ? "ETA: " + d.eta : "";
-      } else if (d.status === "finished") {
-        setProgress(100);
-        clearInterval(polling);
-        // Ordnername aus dem Pfad extrahieren
-        const folder = document.getElementById("folderInput").value.trim();
-        const folderName = folder ? folder.split(/[/\\]/).filter(Boolean).pop() : "Downloads";
-        if (settings.autoClose) startCountdown(d.title, folderName);
-        else {
-          showStatus(`✅ Erfolgreich gespeichert in ${folderName}!`, "success");
-          resetBtn();
-        }
-      } else if (d.status === "error") {
-        showStatus("❌ " + (d.error || "Unbekannter Fehler"), "error");
-        clearInterval(polling);
-        resetBtn();
+function pollProgress(){
+  polling=setInterval(async()=>{
+    try{
+      const res=await fetch("/progress");const d=await res.json();
+      if(d.status==="downloading"){
+        setProgress(d.percent||0);
+        document.getElementById("progressLabel").textContent="Lädt herunter...";
+        document.getElementById("progressSpeed").textContent=d.speed||"";
+        document.getElementById("progressEta").textContent=d.eta?"ETA: "+d.eta:"";
+        document.getElementById("dlFill").style.width=(d.percent||0)+"%";
+        document.getElementById("dlPercent").textContent=Math.round(d.percent||0)+"%";
+        document.getElementById("dlLabel").textContent="Lädt herunter...";
+        document.getElementById("dlSpeed").textContent=d.speed||"";
+        document.getElementById("dlEta").textContent=d.eta?"ETA: "+d.eta:"";
+      } else if(d.status==="finished"){
+        setProgress(100);clearInterval(polling);
+        const folder=document.getElementById("folderInput").value.trim();
+        const folderName=folder?folder.split(/[/\\]/).filter(Boolean).pop():"Downloads";
+        // "Wird heruntergeladen" → fertig
+        document.getElementById("dlActiveCard").classList.remove("show");
+        document.getElementById("dlDone").style.display="block";
+        document.getElementById("dlDoneFolder").textContent=`Gespeichert in: ${folderName}`;
+        updateStats();updateQuickAccess();
+        if(settings.autoClose)startCountdown(d.title,folderName);
+        else{showStatus(`✅ Erfolgreich gespeichert in ${folderName}!`,"success");resetBtn();}
+      } else if(d.status==="error"){
+        showStatus("❌ "+(d.error||"Unbekannter Fehler"),"error");
+        clearInterval(polling);resetBtn();resetNowDl();
       }
-    } catch(e) {}
-  }, 500);
+    }catch(e){}
+  },500);
 }
 
-function setProgress(pct) {
-  document.getElementById("progressFill").style.width = pct + "%";
-  document.getElementById("progressPercent").textContent = Math.round(pct) + "%";
-}
+function resetNowDl(){document.getElementById("dlIdle").style.display="block";document.getElementById("dlActiveCard").classList.remove("show");document.getElementById("dlDone").style.display="none";}
+function setProgress(pct){document.getElementById("progressFill").style.width=pct+"%";document.getElementById("progressPercent").textContent=Math.round(pct)+"%";}
+function showStatus(msg,type){const el=document.getElementById("statusMsg");el.textContent=msg;el.className="status-msg show "+type;}
+function resetBtn(){setTimeout(()=>document.getElementById("dlBtn").disabled=false,1000);}
 
-function showStatus(msg, type) {
-  const el = document.getElementById("statusMsg");
-  el.textContent = msg;
-  el.className = "status-msg show " + type;
-}
-
-function resetBtn() {
-  setTimeout(() => document.getElementById("dlBtn").disabled = false, 1000);
-}
-
-// Countdown & Auto-close
-function startCountdown(title, folderName) {
-  document.getElementById("overlayTitle").textContent = `Gespeichert in: ${folderName || "Downloads"}`;
+function startCountdown(title,folderName){
+  document.getElementById("overlayTitle").textContent=`Gespeichert in: ${folderName||"Downloads"}`;
   document.getElementById("overlay").classList.add("show");
-  let count = 3;
-  document.getElementById("countNum").textContent = count;
-  countdownTimer = setInterval(() => {
-    if (cancelledClose) { clearInterval(countdownTimer); return; }
-    count--;
-    document.getElementById("countNum").textContent = count;
-    if (count <= 0) {
-      clearInterval(countdownTimer);
-      fetch("/shutdown", {method:"POST"}).catch(()=>{});
-      setTimeout(() => window.close(), 600);
-    }
-  }, 1000);
+  let count=3;document.getElementById("countNum").textContent=count;
+  countdownTimer=setInterval(()=>{
+    if(cancelledClose){clearInterval(countdownTimer);return;}
+    count--;document.getElementById("countNum").textContent=count;
+    if(count<=0){clearInterval(countdownTimer);fetch("/shutdown",{method:"POST"}).catch(()=>{});setTimeout(()=>window.close(),600);}
+  },1000);
 }
-
-function cancelClose() {
-  cancelledClose = true;
-  clearInterval(countdownTimer);
+function cancelClose(){
+  cancelledClose=true;clearInterval(countdownTimer);
   document.getElementById("overlay").classList.remove("show");
-  const folder = document.getElementById("folderInput").value.trim();
-  const folderName = folder ? folder.split(/[/\\]/).filter(Boolean).pop() : "Downloads";
-  showStatus(`✅ Erfolgreich gespeichert in ${folderName}!`, "success");
-  resetBtn();
+  const folder=document.getElementById("folderInput").value.trim();
+  const folderName=folder?folder.split(/[/\\]/).filter(Boolean).pop():"Downloads";
+  showStatus(`✅ Erfolgreich gespeichert in ${folderName}!`,"success");resetBtn();
 }
+function openDownloads(){const folder=document.getElementById("folderInput").value.trim();fetch("/open-folder",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({folder})});}
+function openFolderPicker(){const path=prompt("Speicherort eingeben:",document.getElementById("folderInput").value);if(path)document.getElementById("folderInput").value=path;}
 
-function openDownloads() {
-  const folder = document.getElementById("folderInput").value.trim();
-  fetch("/open-folder", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({folder})});
-}
-
-function openFolderPicker() {
-  const path = prompt("Speicherort eingeben:", document.getElementById("folderInput").value);
-  if (path) document.getElementById("folderInput").value = path;
-}
-
-// History
-async function loadHistory() {
-  const res = await fetch("/history");
-  const history = await res.json();
-  const list = document.getElementById("historyList");
-  if (!history.length) {
-    list.innerHTML = '<div class="history-empty">📭 Noch keine Downloads</div>';
-    return;
-  }
-  list.innerHTML = history.map(h => `
+async function loadHistory(){
+  const res=await fetch("/history");const history=await res.json();const list=document.getElementById("historyList");
+  if(!history.length){list.innerHTML='<div class="history-empty">📭 Noch keine Downloads</div>';return;}
+  list.innerHTML=history.map(h=>`
     <div class="history-item">
-      <img class="history-thumb" src="${h.thumbnail || ''}" onerror="this.style.display='none'" />
-      <div class="history-info">
-        <div class="history-title">${h.title}</div>
-        <div class="history-meta">
-          <span class="badge badge-${h.format.toLowerCase()}">${h.format}</span>
-          ${h.quality} · ${h.date}
-        </div>
-      </div>
-      <div class="history-actions">
-        <button class="btn-ghost" onclick="redownload('${h.url}','${h.format}')">↩️</button>
-      </div>
-    </div>
-  `).join("");
+      <img class="history-thumb" src="${h.thumbnail||''}" onerror="this.style.display='none'" />
+      <div class="history-info"><div class="history-title">${h.title}</div><div class="history-meta"><span class="badge badge-${h.format.toLowerCase()}">${h.format}</span>${h.quality} · ${h.date}</div></div>
+      <div class="history-actions"><button class="btn-ghost" onclick="redownload('${h.url}','${h.format}')">↩️</button></div>
+    </div>`).join("");
 }
-
-function redownload(url, fmt) {
-  document.getElementById("urlInput").value = url;
-  setFormat(fmt.toLowerCase());
+function redownload(url,fmt){
+  document.getElementById("urlInput").value=url;setFormat(fmt.toLowerCase());
   showPage("download");
   document.querySelectorAll(".nav-item")[0].classList.add("active");
-  document.querySelectorAll(".nav-item")[1].classList.remove("active");
+  document.querySelectorAll(".nav-item").forEach((n,i)=>{if(i!==0)n.classList.remove("active");});
+}
+async function clearHistory(){if(!confirm("Verlauf wirklich leeren?"))return;await fetch("/history/clear",{method:"POST"});loadHistory();updateStats();updateQuickAccess();}
+
+async function updateStats(){
+  try{
+    const res=await fetch("/history");const history=await res.json();
+    const today=new Date().toLocaleDateString("de-DE");
+    document.getElementById("statTotal").textContent=history.length;
+    document.getElementById("statMp4").textContent=history.filter(h=>h.format==="MP4").length;
+    document.getElementById("statMp3").textContent=history.filter(h=>h.format==="MP3").length;
+    document.getElementById("statToday").textContent=history.filter(h=>h.date&&h.date.startsWith(today)).length;
+    if(history.length>0){
+      const last=history[0];
+      document.getElementById("statLastCard").style.display="block";
+      document.getElementById("statLastItem").innerHTML=`
+        <img class="history-thumb" src="${last.thumbnail||''}" onerror="this.style.display='none'" />
+        <div class="history-info"><div class="history-title">${last.title}</div><div class="history-meta"><span class="badge badge-${last.format.toLowerCase()}">${last.format}</span>${last.date}</div></div>
+        <div class="history-actions"><button class="btn-ghost" onclick="redownload('${last.url}','${last.format}')">↩️</button></div>`;
+    }
+  }catch(e){}
 }
 
-async function clearHistory() {
-  if (!confirm("Verlauf wirklich leeren?")) return;
-  await fetch("/history/clear", {method:"POST"});
-  loadHistory();
+async function updateQuickAccess(){
+  try{
+    const res=await fetch("/history");const history=await res.json();const list=document.getElementById("quickList");
+    if(!history.length){list.innerHTML='<div class="history-empty">📭 Noch keine Downloads</div>';return;}
+    list.innerHTML=history.slice(0,5).map(h=>`
+      <div class="quick-item" onclick="redownload('${h.url}','${h.format}')">
+        <img class="quick-thumb" src="${h.thumbnail||''}" onerror="this.style.display='none'" />
+        <div class="quick-info"><div class="quick-title">${h.title}</div><div class="quick-meta"><span class="badge badge-${h.format.toLowerCase()}">${h.format}</span>${h.date}</div></div>
+      </div>`).join("");
+  }catch(e){}
 }
 
-// Init
 loadSettings();
-document.getElementById("folderInput").value = document.getElementById("folderInput").value || "";
+updateStats();
+updateQuickAccess();
 fetch("/progress").then(r=>r.json()).catch(()=>{});
 </script>
 </body>
