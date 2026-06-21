@@ -38,6 +38,7 @@ jobs:
             --add-data "templates;templates" `
             --add-binary "ffmpeg.exe;." `
             --add-binary "ffprobe.exe;." `
+            --icon "plueschi_downloader.ico" `
             app.py
 
       - name: EXE als Artifact hochladen
