@@ -79,7 +79,6 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
 .toggle.on{background:linear-gradient(135deg,var(--c1),var(--c2));}
 .toggle::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:3px;left:3px;transition:all 0.2s;}
 .toggle.on::after{left:23px;}
-/* Wird heruntergeladen */
 .dl-status-idle{text-align:center;padding:48px 24px;color:rgba(255,255,255,0.2);}
 .dl-status-idle .dl-idle-icon{font-size:48px;margin-bottom:12px;}
 .dl-active-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:24px;display:none;}
@@ -91,23 +90,37 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
 .dl-meta-row{display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:8px;}
 .dl-done{text-align:center;padding:32px;display:none;}
 .dl-done.show{display:block;}
-/* Statistiken */
 .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
 .stat-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:20px;}
 .stat-val{font-size:36px;font-weight:900;background:linear-gradient(135deg,var(--c1-light),var(--c2-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .stat-label{font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;}
-/* Schnellzugriff */
 .quick-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;}
-.quick-item:hover{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.12);}
+.quick-item:hover{background:rgba(255,255,255,0.07);}
 .quick-thumb{width:60px;height:36px;object-fit:cover;border-radius:6px;background:rgba(255,255,255,0.05);flex-shrink:0;}
 .quick-info{flex:1;min-width:0;}
 .quick-title{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .quick-meta{font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;}
+
 /* Unterstützte Seiten */
-.sites-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
-.site-tag{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:6px 12px;font-size:13px;color:rgba(255,255,255,0.6);}
-.site-secret{margin-top:20px;padding:14px 16px;background:rgba(139,92,246,0.07);border:1px dashed rgba(139,92,246,0.25);border-radius:12px;font-size:11px;color:rgba(255,255,255,0.3);line-height:1.6;}
-/* Overlay */
+.sites-scroll{height:500px;overflow-y:auto;padding-right:8px;}
+.sites-scroll::-webkit-scrollbar{width:6px;}
+.sites-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,0.03);border-radius:3px;}
+.sites-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px;}
+.sites-scroll::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2);}
+.sites-category{margin-bottom:20px;}
+.sites-category-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,0.3);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.sites-row{display:flex;flex-wrap:wrap;gap:6px;}
+.site-tag{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:5px 10px;font-size:12px;color:rgba(255,255,255,0.55);white-space:nowrap;transition:all 0.15s;text-decoration:none;display:inline-block;cursor:pointer;}
+.site-tag:hover{background:rgba(255,255,255,0.09);color:rgba(255,255,255,0.9);border-color:rgba(255,255,255,0.2);transform:translateY(-1px);}
+.site-secret{margin-top:16px;padding:14px 16px;background:rgba(139,92,246,0.07);border:1px dashed rgba(139,92,246,0.25);border-radius:12px;font-size:11px;color:rgba(255,255,255,0.3);line-height:1.7;}
+.fsk-box{margin-top:12px;border:1px dashed rgba(255,100,100,0.2);border-radius:10px;overflow:hidden;}
+.fsk-header{padding:10px 14px;background:rgba(255,80,80,0.07);cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(255,255,255,0.3);user-select:none;}
+.fsk-header:hover{background:rgba(255,80,80,0.12);}
+.fsk-content{display:none;padding:12px 14px;}
+.fsk-content.show{display:block;}
+.fsk-sites{display:flex;flex-wrap:wrap;gap:6px;}
+.fsk-tag{background:rgba(255,80,80,0.08);border:1px solid rgba(255,80,80,0.15);border-radius:8px;padding:5px 10px;font-size:12px;color:rgba(255,150,150,0.6);}
+
 .overlay{position:fixed;inset:0;background:rgba(10,10,15,0.93);display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;z-index:999;backdrop-filter:blur(12px);}
 .overlay.show{display:flex;}
 .overlay-icon{font-size:72px;animation:pop 0.4s ease;}
@@ -140,11 +153,10 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
     <div class="sidebar-divider"></div>
     <button class="nav-item active" onclick="showPage('download')"><span class="nav-icon">⬇️</span> Herunterladen</button>
     <button class="nav-item" onclick="showPage('nowdl')"><span class="nav-icon">⏳</span> Wird heruntergeladen</button>
-    <button class="nav-item" onclick="showPage('quick'); updateQuickAccess()"><span class="nav-icon">⚡</span> Schnellzugriff</button>
-    <button class="nav-item" onclick="showPage('stats'); updateStats()"><span class="nav-icon">📊</span> Statistiken</button>
-    <div class="sidebar-divider"></div>
     <button class="nav-item" onclick="showPage('history'); loadHistory()"><span class="nav-icon">📋</span> Verlauf</button>
+    <div class="sidebar-divider"></div>
     <button class="nav-item" onclick="showPage('settings')"><span class="nav-icon">⚙️</span> Einstellungen</button>
+    <button class="nav-item" onclick="showPage('stats'); updateStats()"><span class="nav-icon">📊</span> Statistiken</button>
     <button class="nav-item" onclick="showPage('sites')"><span class="nav-icon">🌐</span> Unterstützte Seiten</button>
     <button class="nav-item" onclick="showPage('impressum')"><span class="nav-icon">📄</span> Impressum</button>
     <div style="flex:1"></div>
@@ -154,7 +166,7 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
 
   <div class="main">
 
-    <!-- 1. Herunterladen -->
+    <!-- Herunterladen -->
     <div class="page active" id="page-download">
       <div class="card">
         <div class="card-title">⬇️ Download</div>
@@ -195,7 +207,7 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
       </div>
     </div>
 
-    <!-- 2. Wird heruntergeladen -->
+    <!-- Wird heruntergeladen -->
     <div class="page" id="page-nowdl">
       <div class="card">
         <div class="card-title">⏳ Wird heruntergeladen</div>
@@ -215,31 +227,6 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
           <div style="font-size:48px;margin-bottom:12px;">✅</div>
           <div style="font-size:16px;font-weight:700;color:#4ade80;">Download abgeschlossen!</div>
           <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:6px;" id="dlDoneFolder"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. Schnellzugriff -->
-    <div class="page" id="page-quick">
-      <div class="card">
-        <div class="card-title">⚡ Schnellzugriff</div>
-        <div id="quickList"><div class="history-empty">📭 Noch keine Downloads</div></div>
-      </div>
-    </div>
-
-    <!-- 4. Statistiken -->
-    <div class="page" id="page-stats">
-      <div class="card">
-        <div class="card-title">📊 Statistiken</div>
-        <div class="stat-grid">
-          <div class="stat-box"><div class="stat-val" id="statTotal">0</div><div class="stat-label">Downloads gesamt</div></div>
-          <div class="stat-box"><div class="stat-val" id="statToday">0</div><div class="stat-label">Heute</div></div>
-          <div class="stat-box"><div class="stat-val" id="statMp4">0</div><div class="stat-label">MP4 Videos</div></div>
-          <div class="stat-box"><div class="stat-val" id="statMp3">0</div><div class="stat-label">MP3 Audios</div></div>
-        </div>
-        <div id="statLastCard" style="display:none;">
-          <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.4);margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;">Letzter Download</div>
-          <div class="history-item" id="statLastItem"></div>
         </div>
       </div>
     </div>
@@ -314,34 +301,168 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
       </div>
     </div>
 
+    <!-- Statistiken -->
+    <div class="page" id="page-stats">
+      <div class="card">
+        <div class="card-title">📊 Statistiken</div>
+        <div class="stat-grid">
+          <div class="stat-box"><div class="stat-val" id="statTotal">0</div><div class="stat-label">Downloads gesamt</div></div>
+          <div class="stat-box"><div class="stat-val" id="statToday">0</div><div class="stat-label">Heute</div></div>
+          <div class="stat-box"><div class="stat-val" id="statMp4">0</div><div class="stat-label">MP4 Videos</div></div>
+          <div class="stat-box"><div class="stat-val" id="statMp3">0</div><div class="stat-label">MP3 Audios</div></div>
+        </div>
+        <div id="statLastCard" style="display:none;">
+          <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.4);margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;">Letzter Download</div>
+          <div class="history-item" id="statLastItem"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Unterstützte Seiten -->
     <div class="page" id="page-sites">
       <div class="card">
-        <div class="card-title">🌐 Unterstützte Seiten</div>
-        <div class="sites-grid">
-          <span class="site-tag">▶️ YouTube</span>
-          <span class="site-tag">🎵 TikTok</span>
-          <span class="site-tag">🐦 Twitter / X</span>
-          <span class="site-tag">📸 Instagram</span>
-          <span class="site-tag">📘 Facebook</span>
-          <span class="site-tag">🎮 Twitch</span>
-          <span class="site-tag">🎬 Vimeo</span>
-          <span class="site-tag">📺 Dailymotion</span>
-          <span class="site-tag">🎵 SoundCloud</span>
-          <span class="site-tag">📱 Snapchat</span>
-          <span class="site-tag">💬 Reddit</span>
-          <span class="site-tag">🎵 Bandcamp</span>
-          <span class="site-tag">📡 Rumble</span>
-          <span class="site-tag">🎙️ Podcast-RSS</span>
-          <span class="site-tag">🎮 YouTube Gaming</span>
-          <span class="site-tag">📺 ARD Mediathek</span>
-          <span class="site-tag">📺 ZDF Mediathek</span>
-          <span class="site-tag">+ 1000 weitere...</span>
+        <div class="card-title" style="justify-content:space-between;">
+          <span>🌐 Unterstützte Seiten</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.3);font-weight:400;">1.800+ Seiten via yt-dlp</span>
         </div>
-        <div class="site-secret">
+        <div class="sites-scroll">
+          <div class="sites-category">
+            <div class="sites-category-title">▶️ Video-Plattformen</div>
+            <div class="sites-row">
+              <a href="https://youtube.com" target="_blank" class="site-tag">YouTube</a><a href="https://music.youtube.com" target="_blank" class="site-tag">YouTube Music</a><a href="https://vimeo.com" target="_blank" class="site-tag">Vimeo</a><a href="https://dailymotion.com" target="_blank" class="site-tag">Dailymotion</a><a href="https://twitch.tv" target="_blank" class="site-tag">Twitch</a><a href="https://twitch.tv" target="_blank" class="site-tag">Twitch Clips</a><a href="https://twitch.tv" target="_blank" class="site-tag">Twitch VOD</a><a href="https://rumble.com" target="_blank" class="site-tag">Rumble</a><a href="https://odysee.com" target="_blank" class="site-tag">Odysee / LBRY</a><a href="https://bitchute.com" target="_blank" class="site-tag">Bitchute</a><a href="https://brighteon.com" target="_blank" class="site-tag">Brighteon</a><a href="https://joinpeertube.org" target="_blank" class="site-tag">Peertube</a><a href="https://veoh.com" target="_blank" class="site-tag">Veoh</a><a href="https://metacafe.com" target="_blank" class="site-tag">Metacafe</a><a href="https://nicovideo.jp" target="_blank" class="site-tag">Niconico</a><a href="https://bilibili.com" target="_blank" class="site-tag">Bilibili</a><a href="https://youku.com" target="_blank" class="site-tag">Youku</a><a href="https://iqiyi.com" target="_blank" class="site-tag">iQIYI</a><a href="https://sohu.com" target="_blank" class="site-tag">Sohu</a><a href="https://mgtv.com" target="_blank" class="site-tag">MGTV</a>
+            </div>
+          </div>
+          <div class="sites-category">
+            <div class="sites-category-title">📱 Social Media</div>
+            <div class="sites-row">
+              <a href="https://tiktok.com" target="_blank" class="site-tag">TikTok</a><a href="https://tiktok.com" target="_blank" class="site-tag">TikTok Live</a><a href="https://instagram.com" target="_blank" class="site-tag">Instagram</a><a href="https://instagram.com" target="_blank" class="site-tag">Instagram Story</a><a href="https://twitter.com" target="_blank" class="site-tag">Twitter / X</a><a href="https://facebook.com" target="_blank" class="site-tag">Facebook</a><a href="https://facebook.com" target="_blank" class="site-tag">Facebook Reel</a><a href="https://snapchat.com" target="_blank" class="site-tag">Snapchat</a><a href="https://reddit.com" target="_blank" class="site-tag">Reddit</a><a href="https://pinterest.com" target="_blank" class="site-tag">Pinterest</a><a href="https://tumblr.com" target="_blank" class="site-tag">Tumblr</a><a href="https://linkedin.com" target="_blank" class="site-tag">LinkedIn</a><a href="https://vk.com" target="_blank" class="site-tag">VK</a><a href="https://ok.ru" target="_blank" class="site-tag">Odnoklassniki</a><a href="https://likee.video" target="_blank" class="site-tag">Likee</a><a href="https://coub.com" target="_blank" class="site-tag">Coub</a><a href="https://9gag.com" target="_blank" class="site-tag">9GAG</a><a href="https://imgur.com" target="_blank" class="site-tag">Imgur</a><a href="https://streamable.com" target="_blank" class="site-tag">Streamable</a>
+            </div>
+          </div>
+          <div class="sites-category">
+            <div class="sites-category-title">🎵 Musik & Audio</div>
+            <div class="sites-row">
+              <a href="https://soundcloud.com" target="_blank" class="site-tag">SoundCloud</a><a href="https://bandcamp.com" target="_blank" class="site-tag">Bandcamp</a><a href="https://audiomack.com" target="_blank" class="site-tag">Audiomack</a><a href="https://audius.co" target="_blank" class="site-tag">Audius</a><a href="https://hearthis.at" target="_blank" class="site-tag">Hearthis.at</a><a href="https://mixcloud.com" target="_blank" class="site-tag">Mixcloud</a><a href="https://hypem.com" target="_blank" class="site-tag">HypeMachine</a><a href="https://audioboom.com" target="_blank" class="site-tag">Audioboom</a><a href="https://jamendo.com" target="_blank" class="site-tag">Jamendo</a><a href="https://reverbnation.com" target="_blank" class="site-tag">Reverbnation</a><a href="https://music.yandex.ru" target="_blank" class="site-tag">Yandex Music</a><a href="https://monstercat.com" target="_blank" class="site-tag">Monstercat</a>
+            </div>
+          </div>
+          <div class="sites-category">
+            <div class="sites-category-title">📺 TV & Mediatheken</div>
+            <div class="sites-row">
+              <a href="https://ardmediathek.de" target="_blank" class="site-tag">ARD Mediathek</a><a href="https://zdf.de" target="_blank" class="site-tag">ZDF Mediathek</a><a href="https://3sat.de" target="_blank" class="site-tag">3sat</a><a href="https://arte.tv" target="_blank" class="site-tag">Arte</a><a href="https://tvthek.orf.at" target="_blank" class="site-tag">ORF TVthek</a><a href="https://srf.ch/play" target="_blank" class="site-tag">SRF Play</a><a href="https://rts.ch" target="_blank" class="site-tag">RTS</a><a href="https://france.tv" target="_blank" class="site-tag">France TV</a><a href="https://tf1.fr" target="_blank" class="site-tag">TF1</a><a href="https://mycanal.fr" target="_blank" class="site-tag">Canal+</a><a href="https://bbc.co.uk/iplayer" target="_blank" class="site-tag">BBC iPlayer</a><a href="https://itv.com" target="_blank" class="site-tag">ITV</a><a href="https://channel4.com" target="_blank" class="site-tag">Channel 4</a><a href="https://npo.nl" target="_blank" class="site-tag">NPO</a><a href="https://svtplay.se" target="_blank" class="site-tag">SVT Play</a><a href="https://nrk.no" target="_blank" class="site-tag">NRK</a><a href="https://dr.dk" target="_blank" class="site-tag">DR.dk</a><a href="https://areena.yle.fi" target="_blank" class="site-tag">Yle</a><a href="https://raiplay.it" target="_blank" class="site-tag">RAI Play</a><a href="https://rtve.es" target="_blank" class="site-tag">RTVE</a><a href="https://rtp.pt" target="_blank" class="site-tag">RTP</a><a href="https://rtbf.be" target="_blank" class="site-tag">RTBF</a>
+            </div>
+          </div>
+          <div class="sites-category">
+            <div class="sites-category-title">📰 News & Magazine</div>
+            <div class="sites-row">
+              <a href="https://cnn.com" target="_blank" class="site-tag">CNN</a>
+              <a href="https://bbc.com/news" target="_blank" class="site-tag">BBC News</a>
+              <a href="https://nbcnews.com" target="_blank" class="site-tag">NBC News</a>
+              <a href="https://cbsnews.com" target="_blank" class="site-tag">CBS News</a>
+              <a href="https://foxnews.com" target="_blank" class="site-tag">Fox News</a>
+              <a href="https://bloomberg.com" target="_blank" class="site-tag">Bloomberg</a>
+              <a href="https://aljazeera.com" target="_blank" class="site-tag">Al Jazeera</a>
+              <a href="https://vice.com" target="_blank" class="site-tag">Vice</a>
+              <a href="https://tagesschau.de" target="_blank" class="site-tag">Tagesschau</a>
+              <a href="https://spiegel.de" target="_blank" class="site-tag">Spiegel Online</a>
+            </div>
+          </div>
+          <div class="sites-category">
+            <div class="sites-category-title">🎮 Gaming & Esports</div>
+            <div class="sites-row">
+              <a href="https://twitch.tv" target="_blank" class="site-tag">Twitch</a>
+              <a href="https://youtube.com/gaming" target="_blank" class="site-tag">YouTube Gaming</a>
+              <a href="https://medal.tv" target="_blank" class="site-tag">Medal.tv</a>
+              <a href="https://mildom.com" target="_blank" class="site-tag">Mildom</a>
+              <a href="https://roosterteeth.com" target="_blank" class="site-tag">Roosterteeth</a>
+              <a href="https://gamespot.com" target="_blank" class="site-tag">Gamespot</a>
+              <a href="https://ign.com" target="_blank" class="site-tag">IGN</a>
+            </div>
+          </div>
+          <div class="sites-category">
+            <div class="sites-category-title">🎓 Bildung & E-Learning</div>
+            <div class="sites-row">
+              <a href="https://khanacademy.org" target="_blank" class="site-tag">Khan Academy</a>
+              <a href="https://ted.com" target="_blank" class="site-tag">TED</a>
+              <a href="https://ocw.mit.edu" target="_blank" class="site-tag">MIT OpenCourseWare</a>
+              <a href="https://lecture2go.uni-hamburg.de" target="_blank" class="site-tag">Lecture2Go</a>
+              <a href="https://lecturio.de" target="_blank" class="site-tag">Lecturio</a>
+              <a href="https://pluralsight.com" target="_blank" class="site-tag">Pluralsight</a>
+              <a href="https://lynda.com" target="_blank" class="site-tag">Lynda</a>
+              <a href="https://egghead.io" target="_blank" class="site-tag">Egghead.io</a>
+            </div>
+          </div>
+          <div class="sites-category">
+            <div class="sites-category-title">🎙️ Podcasts & Radio</div>
+            <div class="sites-row">
+              <a href="https://spreaker.com" target="_blank" class="site-tag">Spreaker</a>
+              <a href="https://podbean.com" target="_blank" class="site-tag">Podbean</a>
+              <a href="https://podomatic.com" target="_blank" class="site-tag">Podomatic</a>
+              <a href="https://player.fm" target="_blank" class="site-tag">Player.fm</a>
+              <a href="https://megaphone.fm" target="_blank" class="site-tag">Megaphone</a>
+              <a href="https://simplecast.com" target="_blank" class="site-tag">Simplecast</a>
+              <a href="https://tunein.com" target="_blank" class="site-tag">TuneIn</a>
+              <a href="https://nrk.no/radio" target="_blank" class="site-tag">NRK Radio</a>
+              <a href="https://ardaudiothek.de" target="_blank" class="site-tag">ARD Audiothek</a>
+              <a href="https://deutschlandfunk.de" target="_blank" class="site-tag">Deutschlandfunk</a>
+              <a href="https://wdr.de" target="_blank" class="site-tag">WDR</a>
+              <a href="https://swr.de" target="_blank" class="site-tag">SWR</a>
+            </div>
+          </div>
+          <div class="sites-category">
+            <div class="sites-category-title">🌍 International</div>
+            <div class="sites-row">
+              <a href="https://hotstar.com" target="_blank" class="site-tag">Hotstar</a>
+              <a href="https://mxplayer.in" target="_blank" class="site-tag">MX Player</a>
+              <a href="https://sonyliv.com" target="_blank" class="site-tag">SonyLIV</a>
+              <a href="https://zee5.com" target="_blank" class="site-tag">Zee5</a>
+              <a href="https://voot.com" target="_blank" class="site-tag">Voot</a>
+              <a href="https://shahid.mbc.net" target="_blank" class="site-tag">Shahid</a>
+              <a href="https://toggle.sg" target="_blank" class="site-tag">Toggle.sg</a>
+              <a href="https://trueid.net" target="_blank" class="site-tag">TrueID</a>
+              <a href="https://linetv.tw" target="_blank" class="site-tag">LINE TV</a>
+              <a href="https://abema.tv" target="_blank" class="site-tag">Abema TV</a>
+              <a href="https://nhk.or.jp" target="_blank" class="site-tag">NHK</a>
+              <a href="https://tver.jp" target="_blank" class="site-tag">TVer</a>
+              <a href="https://rthk.hk" target="_blank" class="site-tag">RTHK</a>
+            </div>
+          </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.06);margin-top:4px;padding-top:12px;font-size:11px;color:rgba(255,255,255,0.25);">+ über 1.000 weitere Seiten werden ebenfalls unterstützt</div>
+
+        <div class="site-secret" style="margin-top:16px;">
           🤫 Du kleiner Schlawiener... ich weiß nach welcher Seite du hier suchst.<br>
-          Aber Psst... die wird auch unterstützt. 😏<br>
+          Aber Psst... die wird auch unterstützt. <span id="fskEmoji" onclick="openFsk()" style="cursor:pointer;font-size:16px;user-select:none;" title="Du weißt was du tust...">😏</span><br>
           <span style="font-size:10px;color:rgba(255,255,255,0.2);">yt-dlp unterstützt offiziell über 1.800 Seiten. Einfach URL reinkopieren und schauen was passiert.</span>
+        </div>
+
+        <!-- FSK Overlay (neuer Tab simuliert als Fullscreen-Modal) -->
+        <div id="fskModal" style="display:none;position:fixed;inset:0;background:rgba(10,10,15,0.97);z-index:9998;backdrop-filter:blur(16px);overflow-y:auto;">
+          <div style="max-width:560px;margin:80px auto;padding:0 24px;">
+            <div style="background:rgba(255,80,80,0.06);border:1px dashed rgba(255,80,80,0.25);border-radius:20px;padding:40px;">
+              <div style="text-align:center;margin-bottom:32px;">
+                <div style="font-size:56px;margin-bottom:12px;">🔞</div>
+                <div style="font-size:22px;font-weight:900;color:#fff;margin-bottom:8px;">Altersverifikation</div>
+                <div style="font-size:13px;color:rgba(255,255,255,0.4);">Dieser Bereich ist nur für Personen ab 18 Jahren.</div>
+              </div>
+              <div id="fskVerify">
+                <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:16px;">🎂 Gib dein Geburtsdatum ein:</div>
+                <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px;">
+                  <input type="number" id="fskDay" placeholder="TT" min="1" max="31" style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,100,100,0.25);border-radius:10px;padding:12px;color:#fff;font-family:Inter,sans-serif;font-size:16px;outline:none;text-align:center;">
+                  <input type="number" id="fskMonth" placeholder="MM" min="1" max="12" style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,100,100,0.25);border-radius:10px;padding:12px;color:#fff;font-family:Inter,sans-serif;font-size:16px;outline:none;text-align:center;">
+                  <input type="number" id="fskYear" placeholder="JJJJ" min="1900" max="2099" style="flex:2;background:rgba(255,255,255,0.06);border:1px solid rgba(255,100,100,0.25);border-radius:10px;padding:12px;color:#fff;font-family:Inter,sans-serif;font-size:16px;outline:none;text-align:center;">
+                </div>
+                <button onclick="verifyAge()" style="width:100%;background:rgba(255,80,80,0.2);border:1px solid rgba(255,80,80,0.35);border-radius:10px;padding:13px;color:rgba(255,150,150,0.9);font-family:Inter,sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:10px;">✅ Bestätigen</button>
+                <div id="fskError" style="font-size:12px;color:#f87171;text-align:center;display:none;"></div>
+              </div>
+              <div id="fskSites" style="display:none;">
+                <div style="font-size:12px;color:rgba(255,150,150,0.5);margin-bottom:12px;">Einfach URL kopieren und im Downloader einfügen 👆</div>
+                <div class="fsk-sites">
+                  <span class="fsk-tag">Pornhub</span><span class="fsk-tag">xVideos</span><span class="fsk-tag">xHamster</span><span class="fsk-tag">RedTube</span><span class="fsk-tag">YouPorn</span><span class="fsk-tag">Tube8</span><span class="fsk-tag">4tube</span><span class="fsk-tag">PornoTube</span><span class="fsk-tag">Nuvid</span><span class="fsk-tag">Cliphunter</span><span class="fsk-tag">Slutload</span><span class="fsk-tag">Eporner</span><span class="fsk-tag">Xnxx</span><span class="fsk-tag">Bongacams</span><span class="fsk-tag">Mofosex</span><span class="fsk-tag">PornCom</span><span class="fsk-tag">YouJizz</span><span class="fsk-tag">WatchPorn</span><span class="fsk-tag">SunPorno</span><span class="fsk-tag">Eroprofile</span>
+                </div>
+                <div style="margin-top:12px;font-size:10px;color:rgba(255,150,150,0.35);">🤫 Kein Kommentar.</div>
+              </div>
+              <button onclick="closeFsk()" style="width:100%;margin-top:20px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:11px;color:rgba(255,255,255,0.4);font-family:Inter,sans-serif;font-size:13px;cursor:pointer;">✖ Schließen</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -375,10 +496,7 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
 let selectedFormat="mp4",selectedQuality="best",polling=null,countdownTimer=null,cancelledClose=false;
 let settings={autoClose:true,autoPreview:true,defaultFolder:"",color1:"#7c3aed",color2:"#db2777"};
 
-function loadSettings(){
-  try{const s=localStorage.getItem("plueschi_settings");if(s)settings={...settings,...JSON.parse(s)};}catch(e){}
-  applySettings();
-}
+function loadSettings(){try{const s=localStorage.getItem("plueschi_settings");if(s)settings={...settings,...JSON.parse(s)};}catch(e){}applySettings();}
 function saveSettings(){localStorage.setItem("plueschi_settings",JSON.stringify(settings));}
 function applySettings(){
   document.getElementById("toggleAutoClose").className="toggle"+(settings.autoClose?" on":"");
@@ -398,9 +516,9 @@ function applyColorsToDOM(c1,c2){
   root.style.setProperty('--c1',c1);root.style.setProperty('--c2',c2);
   root.style.setProperty('--c1-light',c1l);root.style.setProperty('--c2-light',c2l);
   root.style.setProperty('--glow1',`rgba(${hexToRgb(c1)},0.15)`);root.style.setProperty('--glow2',`rgba(${hexToRgb(c2)},0.12)`);
-  let styleEl=document.getElementById("dynamic-colors");
-  if(!styleEl){styleEl=document.createElement("style");styleEl.id="dynamic-colors";document.head.appendChild(styleEl);}
-  styleEl.textContent=`
+  let s=document.getElementById("dynamic-colors");
+  if(!s){s=document.createElement("style");s.id="dynamic-colors";document.head.appendChild(s);}
+  s.textContent=`
     .nav-item.active{background:rgba(${hexToRgb(c1)},0.2)!important;border:1px solid rgba(${hexToRgb(c1)},0.4)!important;color:${c1l}!important;}
     .input:focus{border-color:rgba(${hexToRgb(c1)},0.6)!important;}
     .format-btn:hover{border-color:rgba(${hexToRgb(c1)},0.5)!important;}
@@ -430,6 +548,44 @@ function showPage(name){
   if(event&&event.currentTarget)event.currentTarget.classList.add("active");
 }
 
+function openFsk(){
+  // Immer neu verifizieren — kein localStorage
+  document.getElementById("fskVerify").style.display="block";
+  document.getElementById("fskSites").style.display="none";
+  document.getElementById("fskError").style.display="none";
+  document.getElementById("fskDay").value="";
+  document.getElementById("fskMonth").value="";
+  document.getElementById("fskYear").value="";
+  document.getElementById("fskModal").style.display="block";
+  document.body.style.overflow="hidden";
+}
+
+function closeFsk(){
+  document.getElementById("fskModal").style.display="none";
+  document.body.style.overflow="";
+}
+
+function verifyAge(){
+  const day=parseInt(document.getElementById("fskDay").value);
+  const month=parseInt(document.getElementById("fskMonth").value);
+  const year=parseInt(document.getElementById("fskYear").value);
+  const err=document.getElementById("fskError");
+  if(!day||!month||!year||day<1||day>31||month<1||month>12||year<1900||year>2099){
+    err.textContent="❌ Bitte ein gültiges Datum eingeben.";err.style.display="block";return;
+  }
+  const birth=new Date(year,month-1,day);
+  const today=new Date();
+  let age=today.getFullYear()-birth.getFullYear();
+  const m=today.getMonth()-birth.getMonth();
+  if(m<0||(m===0&&today.getDate()<birth.getDate()))age--;
+  if(age<18){
+    err.textContent=`❌ Du bist ${age} Jahre alt — kein Zutritt! 🚫`;err.style.display="block";return;
+  }
+  err.style.display="none";
+  document.getElementById("fskVerify").style.display="none";
+  document.getElementById("fskSites").style.display="block";
+}
+
 function setFormat(fmt){
   selectedFormat=fmt;
   document.getElementById("btnMp4").classList.toggle("active",fmt==="mp4");
@@ -453,7 +609,6 @@ async function loadPreview(){
     const dur=d.duration?formatDuration(d.duration):"";
     document.getElementById("previewMeta").textContent=[d.uploader,dur].filter(Boolean).join(" · ");
     document.getElementById("previewBox").classList.add("show");
-    // Auch für "Wird heruntergeladen" Seite vorbereiten
     document.getElementById("dlThumb").src=d.thumbnail||"";
     document.getElementById("dlTitle").textContent=d.title||"—";
   }catch(e){}
@@ -471,7 +626,6 @@ async function startDownload(){
   document.getElementById("statusMsg").classList.remove("show");
   setProgress(0);
   document.getElementById("progressLabel").textContent="Startet...";
-  // "Wird heruntergeladen" Seite vorbereiten
   document.getElementById("dlIdle").style.display="none";
   document.getElementById("dlDone").style.display="none";
   document.getElementById("dlActiveCard").classList.add("show");
@@ -504,11 +658,10 @@ function pollProgress(){
         setProgress(100);clearInterval(polling);
         const folder=document.getElementById("folderInput").value.trim();
         const folderName=folder?folder.split(/[/\\]/).filter(Boolean).pop():"Downloads";
-        // "Wird heruntergeladen" → fertig
         document.getElementById("dlActiveCard").classList.remove("show");
         document.getElementById("dlDone").style.display="block";
         document.getElementById("dlDoneFolder").textContent=`Gespeichert in: ${folderName}`;
-        updateStats();updateQuickAccess();
+        updateStats();
         if(settings.autoClose)startCountdown(d.title,folderName);
         else{showStatus(`✅ Erfolgreich gespeichert in ${folderName}!`,"success");resetBtn();}
       } else if(d.status==="error"){
@@ -550,7 +703,7 @@ async function loadHistory(){
   list.innerHTML=history.map(h=>`
     <div class="history-item">
       <img class="history-thumb" src="${h.thumbnail||''}" onerror="this.style.display='none'" />
-      <div class="history-info"><div class="history-title">${h.title}</div><div class="history-meta"><span class="badge badge-${h.format.toLowerCase()}">${h.format}</span>${h.quality} · ${h.date}</div></div>
+      <div class="history-info"><div class="history-title">${h.title}</div><div class="history-meta"><span class="badge badge-${h.format.toLowerCase()}">${h.format}</span>${h.artist?`🎤 ${h.artist} · `:''}${h.quality} · ${h.date}</div></div>
       <div class="history-actions"><button class="btn-ghost" onclick="redownload('${h.url}','${h.format}')">↩️</button></div>
     </div>`).join("");
 }
@@ -560,7 +713,7 @@ function redownload(url,fmt){
   document.querySelectorAll(".nav-item")[0].classList.add("active");
   document.querySelectorAll(".nav-item").forEach((n,i)=>{if(i!==0)n.classList.remove("active");});
 }
-async function clearHistory(){if(!confirm("Verlauf wirklich leeren?"))return;await fetch("/history/clear",{method:"POST"});loadHistory();updateStats();updateQuickAccess();}
+async function clearHistory(){if(!confirm("Verlauf wirklich leeren?"))return;await fetch("/history/clear",{method:"POST"});loadHistory();updateStats();}
 
 async function updateStats(){
   try{
@@ -575,27 +728,14 @@ async function updateStats(){
       document.getElementById("statLastCard").style.display="block";
       document.getElementById("statLastItem").innerHTML=`
         <img class="history-thumb" src="${last.thumbnail||''}" onerror="this.style.display='none'" />
-        <div class="history-info"><div class="history-title">${last.title}</div><div class="history-meta"><span class="badge badge-${last.format.toLowerCase()}">${last.format}</span>${last.date}</div></div>
+        <div class="history-info"><div class="history-title">${last.title}</div><div class="history-meta"><span class="badge badge-${last.format.toLowerCase()}">${last.format}</span>${last.artist?`🎤 ${last.artist} · `:''}${last.date}</div></div>
         <div class="history-actions"><button class="btn-ghost" onclick="redownload('${last.url}','${last.format}')">↩️</button></div>`;
     }
   }catch(e){}
 }
 
-async function updateQuickAccess(){
-  try{
-    const res=await fetch("/history");const history=await res.json();const list=document.getElementById("quickList");
-    if(!history.length){list.innerHTML='<div class="history-empty">📭 Noch keine Downloads</div>';return;}
-    list.innerHTML=history.slice(0,5).map(h=>`
-      <div class="quick-item" onclick="redownload('${h.url}','${h.format}')">
-        <img class="quick-thumb" src="${h.thumbnail||''}" onerror="this.style.display='none'" />
-        <div class="quick-info"><div class="quick-title">${h.title}</div><div class="quick-meta"><span class="badge badge-${h.format.toLowerCase()}">${h.format}</span>${h.date}</div></div>
-      </div>`).join("");
-  }catch(e){}
-}
-
 loadSettings();
 updateStats();
-updateQuickAccess();
 fetch("/progress").then(r=>r.json()).catch(()=>{});
 </script>
 </body>
