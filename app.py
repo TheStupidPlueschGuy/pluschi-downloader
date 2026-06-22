@@ -3,11 +3,14 @@ import sys
 import threading
 import webbrowser
 import json
+import tempfile
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify
 import yt_dlp
 
 app = Flask(__name__)
+
+# ===== HELPERS =====
 
 def get_download_folder():
     home = os.path.expanduser("~")
@@ -36,16 +39,20 @@ def load_history():
 def save_history(entry):
     history = load_history()
     history.insert(0, entry)
-    history = history[:50]  # Max 50 Einträge
+    history = history[:50]
     try:
         with open(get_history_file(), "w", encoding="utf-8") as f:
             json.dump(history, f, ensure_ascii=False, indent=2)
     except:
         pass
 
+# ===== GLOBALS =====
+
 FFMPEG_DIR = get_ffmpeg_dir()
 progress_data = {"percent": 0, "status": "idle", "filename": "", "title": ""}
 current_download_folder = get_download_folder()
+
+# ===== PROGRESS HOOK =====
 
 def progress_hook(d):
     global progress_data
@@ -62,13 +69,14 @@ def progress_hook(d):
         progress_data["percent"] = 100
         progress_data["status"] = "finished"
 
+# ===== ROUTES =====
+
 @app.route("/")
 def index():
     return render_template("index.html")
 
 @app.route("/info", methods=["POST"])
 def get_info():
-    """Holt Thumbnail + Titel vor dem Download"""
     data = request.json
     url = data.get("url", "").strip()
     if not url:
@@ -90,10 +98,13 @@ def get_info():
 def download():
     global progress_data, current_download_folder
     data = request.json
-    url = data.get("url", "").strip()
-    fmt = data.get("format", "mp4")
-    quality = data.get("quality", "best")
-    folder = data.get("folder", current_download_folder)
+    url        = data.get("url", "").strip()
+    fmt        = data.get("format", "mp4")
+    quality    = data.get("quality", "best")
+    folder     = data.get("folder", current_download_folder)
+    proxy      = data.get("proxy", "").strip()        # Proxy-URL
+    cookies    = data.get("cookies", "").strip()      # Netscape cookies text
+    filename   = data.get("filename", "").strip()     # Custom Dateiname
 
     if not url:
         return jsonify({"error": "Keine URL eingegeben!"}), 400
@@ -103,13 +114,39 @@ def download():
 
     def run():
         global progress_data
+        cookie_file = None
         try:
+            # Cookies-Datei temporär anlegen wenn übergeben
+            if cookies:
+                cookie_file = tempfile.NamedTemporaryFile(
+                    mode="w", suffix=".txt", delete=False, encoding="utf-8"
+                )
+                # Netscape-Header sicherstellen
+                if not cookies.startswith("# Netscape"):
+                    cookie_file.write("# Netscape HTTP Cookie File\n")
+                cookie_file.write(cookies)
+                cookie_file.close()
+
+            # Output-Template: custom Dateiname oder Originaltitel
+            if filename:
+                outtmpl = os.path.join(folder, f"{filename}.%(ext)s")
+            else:
+                outtmpl = os.path.join(folder, "%(title)s.%(ext)s")
+
             base_opts = {
-                "outtmpl": os.path.join(folder, "%(title)s.%(ext)s"),
+                "outtmpl": outtmpl,
                 "progress_hooks": [progress_hook],
                 "quiet": True,
                 "ffmpeg_location": FFMPEG_DIR,
             }
+
+            # Proxy
+            if proxy:
+                base_opts["proxy"] = proxy
+
+            # Cookies
+            if cookie_file:
+                base_opts["cookiefile"] = cookie_file.name
 
             if fmt == "mp3":
                 ydl_opts = {
@@ -138,6 +175,7 @@ def download():
                 info = ydl.extract_info(url, download=True)
                 title = info.get("title", "Unbekannt") if info else "Unbekannt"
                 progress_data["title"] = title
+                progress_data["status"] = "finished"
                 save_history({
                     "title": title,
                     "url": url,
@@ -146,11 +184,19 @@ def download():
                     "date": datetime.now().strftime("%d.%m.%Y %H:%M"),
                     "folder": folder,
                     "thumbnail": info.get("thumbnail", "") if info else "",
+                    "artist": info.get("uploader", "") if info else "",
                 })
 
         except Exception as e:
             progress_data["status"] = "error"
             progress_data["error"] = str(e)
+        finally:
+            # Temp-Cookie-Datei aufräumen
+            if cookie_file and os.path.exists(cookie_file.name):
+                try:
+                    os.unlink(cookie_file.name)
+                except:
+                    pass
 
     threading.Thread(target=run, daemon=True).start()
     return jsonify({"ok": True})
@@ -176,8 +222,42 @@ def clear_history():
 def open_folder():
     data = request.json
     folder = data.get("folder", current_download_folder)
-    os.startfile(folder)
+    if os.path.exists(folder):
+        os.startfile(folder)
     return jsonify({"ok": True})
+
+@app.route("/open-music", methods=["POST"])
+def open_music():
+    """Öffnet die zuletzt heruntergeladene MP3-Datei im Standard-Musikplayer."""
+    data = request.json
+    folder = data.get("folder", current_download_folder)
+    title  = data.get("title", "")
+
+    # Versuche die Datei anhand des Titels zu finden
+    if title and folder and os.path.exists(folder):
+        # Sanitize Dateiname wie yt-dlp es macht (grob)
+        safe_title = "".join(c for c in title if c not in r'\/:*?"<>|').strip()
+        mp3_path = os.path.join(folder, safe_title + ".mp3")
+        if os.path.exists(mp3_path):
+            os.startfile(mp3_path)
+            return jsonify({"ok": True, "opened": mp3_path})
+
+    # Fallback: neueste .mp3 im Ordner öffnen
+    try:
+        if folder and os.path.exists(folder):
+            mp3s = [
+                os.path.join(folder, f)
+                for f in os.listdir(folder)
+                if f.lower().endswith(".mp3")
+            ]
+            if mp3s:
+                newest = max(mp3s, key=os.path.getmtime)
+                os.startfile(newest)
+                return jsonify({"ok": True, "opened": newest})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+    return jsonify({"ok": False, "reason": "Keine MP3 gefunden"})
 
 @app.route("/shutdown", methods=["POST"])
 def shutdown():
@@ -187,6 +267,8 @@ def shutdown():
         os._exit(0)
     threading.Thread(target=kill, daemon=True).start()
     return jsonify({"ok": True})
+
+# ===== START =====
 
 def open_browser():
     webbrowser.open("http://localhost:5000")
