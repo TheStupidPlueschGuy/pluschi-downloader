@@ -219,9 +219,117 @@ label{display:block;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;
 
 /* Notification toast */
 #toast{position:fixed;bottom:24px;right:24px;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;transition:opacity 0.3s;opacity:0;pointer-events:none;}
+
+/* ===== SPLASH SCREEN ===== */
+#splash-screen{
+  position:fixed;inset:0;z-index:99999;
+  background:#0a0a0f;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+  transition:opacity 0.5s ease, visibility 0.5s ease;
+}
+#splash-screen.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+.splash-glow-l{
+  position:absolute;left:-80px;top:50%;transform:translateY(-50%);
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,0.22) 0%,transparent 70%);
+  animation:sglow 3s ease-in-out infinite alternate;
+}
+.splash-glow-r{
+  position:absolute;right:-80px;top:50%;transform:translateY(-50%);
+  width:360px;height:360px;border-radius:50%;
+  background:radial-gradient(circle,rgba(219,39,119,0.16) 0%,transparent 70%);
+  animation:sglow 3s ease-in-out infinite alternate-reverse;
+}
+@keyframes sglow{from{opacity:0.6;}to{opacity:1;}}
+.splash-inner{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:22px;
+  animation:splash-enter 0.7s cubic-bezier(0.16,1,0.3,1) both;
+}
+@keyframes splash-enter{
+  from{opacity:0;transform:translateY(28px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.splash-ring{
+  width:104px;height:104px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(124,58,237,0.2),rgba(219,39,119,0.15));
+  border:1.5px solid rgba(167,139,250,0.25);
+  display:flex;align-items:center;justify-content:center;position:relative;
+  animation:splash-ring-pop 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s both, splash-bob 2.8s ease-in-out 1s infinite;
+}
+@keyframes splash-ring-pop{
+  from{opacity:0;transform:scale(0.4) rotate(-20deg);}
+  to{opacity:1;transform:scale(1) rotate(0deg);}
+}
+@keyframes splash-bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+.splash-ring::before{
+  content:'';position:absolute;inset:-7px;border-radius:50%;
+  border:1px solid transparent;
+  border-top-color:rgba(167,139,250,0.55);
+  border-right-color:rgba(236,72,153,0.35);
+  animation:splash-orbit 2.2s linear 0.7s infinite;
+}
+@keyframes splash-orbit{to{transform:rotate(360deg);}}
+.splash-fox{font-size:50px;animation:splash-fox-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;}
+@keyframes splash-fox-pop{from{opacity:0;transform:scale(0.2);}to{opacity:1;transform:scale(1);}}
+.splash-title{
+  font-size:28px;font-weight:900;letter-spacing:-0.5px;
+  background:linear-gradient(135deg,#a78bfa,#ec4899);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:splash-enter 0.6s cubic-bezier(0.16,1,0.3,1) 0.25s both;
+}
+.splash-sub{
+  font-size:13px;color:rgba(255,255,255,0.35);margin-top:-14px;letter-spacing:0.3px;
+  animation:splash-enter 0.6s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+}
+.splash-bar-wrap{
+  width:240px;display:flex;flex-direction:column;gap:9px;
+  animation:splash-enter 0.6s cubic-bezier(0.16,1,0.3,1) 0.45s both;
+}
+.splash-track{height:3px;border-radius:999px;background:rgba(255,255,255,0.07);overflow:hidden;}
+.splash-fill{
+  height:100%;border-radius:999px;
+  background:linear-gradient(90deg,var(--c1),var(--c2));
+  width:0%;transition:width 0.35s ease;
+}
+.splash-status{font-size:11px;color:rgba(255,255,255,0.28);text-align:center;letter-spacing:0.5px;}
+.splash-particles{position:absolute;inset:0;pointer-events:none;}
+.sp{position:absolute;border-radius:50%;opacity:0;}
+.sp1{width:3px;height:3px;background:#a78bfa;top:28%;left:18%;animation:sp-f1 4s ease-in-out 1s infinite;}
+.sp2{width:2px;height:2px;background:#ec4899;top:62%;left:76%;animation:sp-f2 5s ease-in-out 1.5s infinite;}
+.sp3{width:4px;height:4px;background:#7c3aed;top:22%;left:68%;animation:sp-f3 3.5s ease-in-out 0.8s infinite;}
+.sp4{width:2px;height:2px;background:#db2777;top:74%;left:33%;animation:sp-f1 4.5s ease-in-out 2s infinite;}
+.sp5{width:3px;height:3px;background:#a78bfa;top:46%;left:84%;animation:sp-f2 3.8s ease-in-out 1.2s infinite;}
+.sp6{width:2px;height:2px;background:#ec4899;top:15%;left:42%;animation:sp-f3 4.2s ease-in-out 0.5s infinite;}
+@keyframes sp-f1{0%,100%{opacity:0;transform:translateY(0);}20%{opacity:0.7;}50%{opacity:0.5;transform:translateY(-18px);}80%{opacity:0.6;}}
+@keyframes sp-f2{0%,100%{opacity:0;transform:translateY(0);}25%{opacity:0.6;}55%{opacity:0.4;transform:translateY(-14px);}85%{opacity:0.5;}}
+@keyframes sp-f3{0%,100%{opacity:0;transform:translateY(0);}30%{opacity:0.8;}60%{opacity:0.5;transform:translateY(-22px);}90%{opacity:0.3;}}
+
 </style>
 </head>
 <body>
+
+<!-- SPLASH SCREEN -->
+<div id="splash-screen">
+  <div class="splash-glow-l"></div>
+  <div class="splash-glow-r"></div>
+  <div class="splash-particles">
+    <div class="sp sp1"></div><div class="sp sp2"></div><div class="sp sp3"></div>
+    <div class="sp sp4"></div><div class="sp sp5"></div><div class="sp sp6"></div>
+  </div>
+  <div class="splash-inner">
+    <div class="splash-ring"><div class="splash-fox">🦊</div></div>
+    <div>
+      <div class="splash-title">Plüsch Downloader</div>
+      <div class="splash-sub" style="margin-top:10px;">by TheStupidPlueschGuy aka Plüschi</div>
+    </div>
+    <div class="splash-bar-wrap">
+      <div class="splash-track"><div class="splash-fill" id="splashFill"></div></div>
+      <div class="splash-status" id="splashStatus">Initialisierung...</div>
+    </div>
+  </div>
+</div>
+
 <div class="bg-glow"></div>
 
 <!-- Update Banner (standalone, above layout) -->
@@ -1134,6 +1242,43 @@ function verifyAge() {
 }
 
 // ===== INIT =====
+
+// ===== SPLASH =====
+(function(){
+  const fill = document.getElementById("splashFill");
+  const status = document.getElementById("splashStatus");
+  const screen = document.getElementById("splash-screen");
+  const msgs = [
+    [10, "Initialisierung..."],
+    [30, "yt-dlp wird geladen..."],
+    [55, "FFmpeg bereit..."],
+    [75, "Verbinde mit Server..."],
+    [90, "Fast fertig..."],
+  ];
+  let mi = 0;
+  function step(){
+    if(mi < msgs.length){
+      fill.style.width = msgs[mi][0] + "%";
+      status.textContent = msgs[mi][1];
+      mi++;
+      setTimeout(step, 320 + Math.random()*180);
+    }
+  }
+  setTimeout(step, 200);
+
+  async function waitForServer(){
+    try {
+      await fetch("/progress");
+      fill.style.width = "100%";
+      status.textContent = "Los geht's! 🦊";
+      setTimeout(() => screen.classList.add("hidden"), 420);
+    } catch(e) {
+      setTimeout(waitForServer, 300);
+    }
+  }
+  setTimeout(waitForServer, 800);
+})();
+
 loadSettings();
 updateStats();
 setupDragDrop();
