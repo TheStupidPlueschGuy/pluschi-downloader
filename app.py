@@ -1,7 +1,6 @@
 import os
 import sys
 import threading
-import webbrowser
 import json
 import tempfile
 from datetime import datetime
@@ -102,9 +101,11 @@ def download():
     fmt        = data.get("format", "mp4")
     quality    = data.get("quality", "best")
     folder     = data.get("folder", current_download_folder)
-    proxy      = data.get("proxy", "").strip()        # Proxy-URL
-    cookies    = data.get("cookies", "").strip()      # Netscape cookies text
-    filename   = data.get("filename", "").strip()     # Custom Dateiname
+    proxy      = data.get("proxy", "").strip()
+    cookies    = data.get("cookies", "").strip()
+    filename   = data.get("filename", "").strip()
+    pl_start   = data.get("playlist_start", 1)
+    pl_end     = data.get("playlist_end", None)
 
     if not url:
         return jsonify({"error": "Keine URL eingegeben!"}), 400
@@ -116,18 +117,15 @@ def download():
         global progress_data
         cookie_file = None
         try:
-            # Cookies-Datei temporär anlegen wenn übergeben
             if cookies:
                 cookie_file = tempfile.NamedTemporaryFile(
                     mode="w", suffix=".txt", delete=False, encoding="utf-8"
                 )
-                # Netscape-Header sicherstellen
                 if not cookies.startswith("# Netscape"):
                     cookie_file.write("# Netscape HTTP Cookie File\n")
                 cookie_file.write(cookies)
                 cookie_file.close()
 
-            # Output-Template: custom Dateiname oder Originaltitel
             if filename:
                 outtmpl = os.path.join(folder, f"{filename}.%(ext)s")
             else:
@@ -138,13 +136,14 @@ def download():
                 "progress_hooks": [progress_hook],
                 "quiet": True,
                 "ffmpeg_location": FFMPEG_DIR,
+                "playliststart": int(pl_start) if pl_start else 1,
+                "noplaylist": False,
             }
 
-            # Proxy
+            if pl_end:
+                base_opts["playlistend"] = int(pl_end)
             if proxy:
                 base_opts["proxy"] = proxy
-
-            # Cookies
             if cookie_file:
                 base_opts["cookiefile"] = cookie_file.name
 
@@ -185,13 +184,13 @@ def download():
                     "folder": folder,
                     "thumbnail": info.get("thumbnail", "") if info else "",
                     "artist": info.get("uploader", "") if info else "",
+                    "filesize": info.get("filesize") or info.get("filesize_approx") or 0 if info else 0,
                 })
 
         except Exception as e:
             progress_data["status"] = "error"
             progress_data["error"] = str(e)
         finally:
-            # Temp-Cookie-Datei aufräumen
             if cookie_file and os.path.exists(cookie_file.name):
                 try:
                     os.unlink(cookie_file.name)
@@ -228,51 +227,73 @@ def open_folder():
 
 @app.route("/open-music", methods=["POST"])
 def open_music():
-    """Öffnet die zuletzt heruntergeladene MP3-Datei im Standard-Musikplayer."""
     data = request.json
     folder = data.get("folder", current_download_folder)
     title  = data.get("title", "")
-
-    # Versuche die Datei anhand des Titels zu finden
     if title and folder and os.path.exists(folder):
-        # Sanitize Dateiname wie yt-dlp es macht (grob)
         safe_title = "".join(c for c in title if c not in r'\/:*?"<>|').strip()
         mp3_path = os.path.join(folder, safe_title + ".mp3")
         if os.path.exists(mp3_path):
             os.startfile(mp3_path)
             return jsonify({"ok": True, "opened": mp3_path})
-
-    # Fallback: neueste .mp3 im Ordner öffnen
     try:
         if folder and os.path.exists(folder):
-            mp3s = [
-                os.path.join(folder, f)
-                for f in os.listdir(folder)
-                if f.lower().endswith(".mp3")
-            ]
+            mp3s = [os.path.join(folder, f) for f in os.listdir(folder) if f.lower().endswith(".mp3")]
             if mp3s:
                 newest = max(mp3s, key=os.path.getmtime)
                 os.startfile(newest)
                 return jsonify({"ok": True, "opened": newest})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
     return jsonify({"ok": False, "reason": "Keine MP3 gefunden"})
 
 @app.route("/shutdown", methods=["POST"])
 def shutdown():
     def kill():
         import time
-        time.sleep(1.5)
+        time.sleep(0.5)
+        if window:
+            window.destroy()
         os._exit(0)
     threading.Thread(target=kill, daemon=True).start()
     return jsonify({"ok": True})
 
-# ===== START =====
+# ===== PYWEBVIEW START =====
 
-def open_browser():
-    webbrowser.open("http://localhost:5000")
+window = None
+
+def start_flask():
+    app.run(debug=False, port=5000, use_reloader=False)
 
 if __name__ == "__main__":
-    threading.Timer(1.2, open_browser).start()
-    app.run(debug=False, port=5000)
+    try:
+        import webview
+
+        # Flask im Hintergrund starten
+        flask_thread = threading.Thread(target=start_flask, daemon=True)
+        flask_thread.start()
+
+        # Kurz warten bis Flask bereit ist
+        import time
+        time.sleep(1.0)
+
+        # PyWebView Fenster erstellen
+        window = webview.create_window(
+            title="Plüsch Downloader",
+            url="http://localhost:5000",
+            width=1100,
+            height=720,
+            min_size=(900, 600),
+            resizable=True,
+            text_select=False,
+            confirm_close=False,
+        )
+
+        # App starten (blockiert bis Fenster geschlossen wird)
+        webview.start(debug=False)
+
+    except ImportError:
+        # Fallback: Browser öffnen wenn PyWebView nicht installiert
+        import webbrowser
+        threading.Timer(1.2, lambda: webbrowser.open("http://localhost:5000")).start()
+        app.run(debug=False, port=5000)
